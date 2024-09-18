@@ -1,0 +1,1044 @@
+/* Home.css */
+
+
+.cabecera {
+    position: relative; /* Asegúrate de que la posición sea relativa para que el pseudo-elemento se posicione correctamente */
+    
+
+}
+
+
+
+
+.description-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f563; /* Fondo de la tarjeta */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.description-card img {
+  width: 676px;
+  height: 576px;
+  border-radius: 10px;
+  object-position: center; /* Alinea la imagen al centro del contenedor */
+  overflow: visible;
+}
+
+.description-text {
+  width: 50%; /* El texto ocupará el 50% de la tarjeta */
+  padding-left: 20px;
+}
+
+  
+.content {
+  padding-bottom: 300px;
+  display: flex;
+  justify-content: space-between; /* Mantiene espacio entre photo y description */
+  margin-top: 40px;
+  flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+}
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 200px;
+  padding: 15px 30px; 
+  margin-right: 270px;
+}
+
+@media (max-width: 768px) {
+  .description-card {
+    flex-direction: column; /* Apila la imagen y el texto verticalmente en pantallas pequeñas */
+    width: 100%; /* Asegura que la tarjeta ocupe todo el ancho disponible en pantallas pequeñas */
+    padding: 10px; /* Ajusta el padding para pantallas pequeñas */
+    padding-bottom: 100px;
+    background-color:#ffffff5d
+  }
+  
+  .description-card img {
+    width: 70%; /* Asegura que la imagen ocupe todo el ancho disponible en pantallas pequeñas */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+    margin-bottom: 10px; /* Espacio debajo de la imagen en pantallas pequeñas */
+  }
+
+  .description-text {
+    width: 50%; /* Asegura que el texto ocupe todo el ancho disponible en pantallas pequeñas */
+    padding-left: 0; /* Elimina el padding izquierdo en pantallas pequeñas */
+    padding-bottom: 10px;
+  }
+
+  .buttonContainer {
+    justify-content: center; /* Centra los botones en pantallas pequeñas */
+    margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
+  }
+}
+
+
+.fondo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca el fondo detrás de todos los elementos */
+  object-fit: cover;
+  opacity: 0.7; /* Opacidad ajustada correctamente */
+}
+
+.fondoCover {
+  /* Ajusta la visibilidad del fondo en pantallas grandes */
+  background-size: cover; /* Asegura que el fondo cubra todo el contenedor */
+  background-position: center; /* Centra el fondo */
+  opacity: 1; /* Corrige la opacidad a decimal */
+  border: none; /* Elimina el borde para que no interfiera */
+  position: relative; /* Cambia a relative para manejar el posicionamiento */
+  margin: 0; /* Elimina el margen */
+  padding: 0; /* Elimina el padding */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .fondoCover {
+    background-size: cover; /* Asegura que el fondo siga cubriendo el contenedor */
+    background-position: center; /* Centra el fondo */
+    opacity: 1; /* Corrige la opacidad a decimal */
+    position: relative; /* Cambia a relative para manejar el posicionamiento */
+    margin: 0; /* Elimina el margen */
+    padding: 0; /* Elimina el padding */
+  }
+}
+
+
+.fondo img {
+  width: 100%; 
+  height: 100%; /* Asegura que cubra todo el contenedor en ambos ejes */
+  object-fit: cover; /* Cubre todo el contenedor sin distorsionar la imagen */
+  object-position: center; 
+}
+
+.fondo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* Ajusta esta altura según el tamaño del difuminado deseado */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+  pointer-events: none; /* Evita interferencias con el usuario */
+}
+
+.buttonContainer :hover {
+  background-color: rgb(11, 189, 169);
+}
+
+.planButton {
+  background-color: rgb(34, 148, 169); 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  margin-right:10px ;
+}
+
+.benefitsSection {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 20px;
+  flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .benefitsSection {
+    flex-direction: column; /* Apila los elementos verticalmente en pantallas pequeñas */
+    padding: 30px 10px; /* Reduce el padding en pantallas pequeñas */
+  }
+  .benefitCard{
+    max-width: 100px;
+    border-color: red;
+    background-color: red;
+  }
+}
+
+@media (max-width: 480px) {
+  .benefitsSection {
+    padding: 20px 5px; /* Reduce aún más el padding en dispositivos pequeños */
+
+  }
+  .benefitsSection .benefitCard .plato1{
+ 
+   max-width: 300px;
+  
+  }
+}
+
+
+.benefitCard {
+  margin-top: 300px;
+  padding-top: 300px;
+
+  flex: 1;
+  max-width: 30%;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajusta o elimina si es necesario */
+  padding: 20px;
+  margin: 0 10px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: float 6s ease-in-out infinite
+}
+
+#cartabeneficioid:hover {
+  transform: scale(1.05); /* Aumenta el tamaño en un 5% */
+  transition: transform 0.3s ease; /* Transición suave */
+}
+
+.benefitCard:hover.animate__animated {
+  animation-duration: 1s;
+}
+
+.benefitCard:nth-child(1):hover {
+  animation-name: bounce;
+}
+
+.benefitCard:nth-child(2):hover {
+  animation-name: pulse;
+}
+
+.benefitCard:nth-child(3):hover {
+  animation-name: rubberBand;
+}
+
+.benefitCard h4 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.benefitCard p {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.benefitCard h4, .benefitCard p {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Ajusta el tamaño y color según sea necesario */
+}
+
+@keyframes shine {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+.scheduleButton {
+  background-color: #2294a9; /* Color base del botón */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, rgb(34, 148, 169) 25%, rgba(255, 255, 255, 0) 50%, rgb(34, 148, 169)  75%);
+  background-size: 200% 200%;
+  animation: shine 6s infinite; /* Aplica la animación de brillo */
+  transition: all 0.4s ease;
+}
+
+
+
+
+.photoContainer,
+.description {
+  flex: 1;
+  max-width: 48%; /* Asegura que ambos elementos tengan un tamaño similar */
+  margin-bottom: 20px; /* Añade espacio entre los elementos cuando se apilan */
+}
+
+
+
+
+
+
+.photo {
+  max-width: 100%;
+  border-radius: 10px;
+ max-width: 350px;  
+  max-height: 350px;
+
+}
+
+.description {
+  margin-right: 65px;
+  padding: 15px; /* Reduce el padding para ocupar menos espacio */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px; /* Reduce el ancho máximo del contenedor */
+  font-size: 1.1rem; /* Aumenta ligeramente el tamaño de la fuente */
+  line-height: 1.6; /* Mejora la legibilidad del texto */
+  max-height: 400px;
+
+}
+
+
+
+.photoCover {
+  background-color: #ffffff00;
+  opacity: 100%;
+  max-width: 1000px;
+  border-radius: 5px;
+  float: right; /* Flota a la derecha */
+  margin: 0 0 10px 10px; /* Espaciado a la izquierda para evitar que el texto se pegue */
+  width: auto; /* Mantiene el tamaño de la imagen acorde a su contenido */
+  box-sizing: border-box; /* Incluye el padding y border en el width total */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .photoCover {
+    opacity: 100%;
+    float: none; /* Elimina el float en pantallas pequeñas para apilar elementos verticalmente */
+    margin: 0 auto; /* Centra la imagen en pantallas pequeñas */
+    width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible en pantallas pequeñas */
+    max-width: 90%; /* Asegura que la imagen no se extienda más allá de su contenedor en pantallas pequeñas */
+  }
+
+  .banner {
+    opacity: 100%;
+       /* Ajusta el tamaño máximo de la imagen del banner */
+    width: 100%; /* Asegura que la imagen del banner ocupe todo el ancho disponible en pantallas pequeñas */
+    float: none; /* Elimina el float para que se centre o alinee según el flujo del contenedor */
+  }
+}
+
+
+.InternBanner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-left: 330px;
+  max-width: 1200px;
+  width: 100%; /* Asegura que el banner ocupe todo el ancho del contenedor */
+  overflow: hidden; /* Evita que el contenido se desborde si es más grande que el contenedor */
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .InternBanner {
+    max-height: 100px; /* Reduce la altura en pantallas más pequeñas */
+    padding: 10px; /* Agrega algo de espacio interno en móviles */
+    max-width: 100px;
+    padding-left:5px;
+    margin-left: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  .InternBanner {
+    max-height:100px; /* Ajusta aún más la altura en dispositivos muy pequeños */
+    max-width: 600px;
+    padding: 1px; /* Reduce el padding en pantallas muy pequeñas */
+  }
+}
+
+
+.banner {
+  display: flex;
+  padding: 10px;
+  margin-bottom: 50px;
+  float: right;
+  margin-left: 1000px;
+  
+}
+/*segunda imagen */
+
+.titulo-pag{
+  display: flex;
+   max-height: 50px;
+  padding-left: 1700px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .buttonContainer {
+    margin-right: 50px; /* Ajusta el margen en pantallas medianas */
+  }
+.description-card{
+  max-width: 400px;
+  max-height: 430px;
+  margin-left: 0;
+  margin-right: 0px;
+}
+  .photoContainer,
+  .description {
+    max-width: 100%; /* Ocupan todo el ancho en pantallas medianas */
+    margin-left: 0;
+    margin-right: 0;
+
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column; /* Cambia el layout a columna en pantallas pequeñas */
+    align-items: center;
+  }
+ 
+
+  }
+  @media (max-width: 480px){
+    .photoContainer{
+      border-color: red;
+      background-color: red;
+  }
+
+  .photoContainer,
+  .description {
+    max-width: 100%; /* Asegura que ocupen todo el ancho disponible */
+    padding-bottom: 130px;
+  }
+
+  .description {
+    margin-right: 0; /* Elimina el margen derecho en pantallas pequeñas */
+
+  }
+}
+
+
+/* Nueva Sección: Tarjeta de Planes */
+.seccion-planes{
+  padding-top: 100px;
+
+}
+.planCard:hover {
+  transform: scale(1.05); /* Aumenta el tamaño en un 5% */
+  transition: transform 0.6s ease; /* Transición suave */
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.cardContainer {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  padding: 20px;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: space-evenly; /* Espacio entre las tarjetas */
+  flex-wrap: wrap; /* Permite que las tarjetas se alineen en varias filas si el espacio no es suficiente */
+  gap: 20px; /* Espaciado entre tarjetas */
+  padding: 20px;
+
+}
+
+.planCard {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  height: 400px;
+  position: relative; /* Para el posicionamiento de la imagen de fondo */
+  overflow: hidden;
+}
+
+.planCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+  position: relative; /* Para que esté encima del fondo */
+  z-index: 1; /* Elevar el texto sobre la imagen de fondo */
+}
+
+.planCard p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #555;
+  position: relative; /* Para que esté encima del fondo */
+  z-index: 1; /* Elevar el texto sobre la imagen de fondo */
+}
+
+.reserveButton {
+  background-color: #2294a9;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(45deg, #2294a9 25%, rgba(255, 255, 255, 0) 50%, #2294a9 75%);
+  background-size: 200% 200%;
+  animation: shine 6s infinite;
+  transition: all 0.6s ease;
+  z-index: 1; /* Mantener el botón encima del fondo */
+}
+
+.fototarjeta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Para que la imagen se ajuste sin distorsionar */
+  z-index: 0; /* Imagen detrás del contenido */
+  opacity: 1; /* Sin difuminar la imagen */
+  transition: smooth; /* Elimina cualquier animación al pasar el mouse */
+}
+
+/* Estilos del modal */
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9); /* Escalado inicial más pequeño */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Tamaño normal */
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9); /* Escalado pequeño al desaparecer */
+  }
+}
+
+/* Animación de borde de rotación */
+
+
+/* Estilos para el modal */
+/* Estilos del modal */
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9); /* Escalado inicial más pequeño */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); /* Tamaño normal */
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9); /* Escalado pequeño al desaparecer */
+  }
+}
+
+/* Animación de borde de rotación */
+@keyframes rotateBorder {
+  0% {
+    border-color: #2294a9;
+  }
+  50% {
+    border-color: #1d7e92;
+  }
+  100% {
+    border-color: #2294a9;
+  }
+}
+
+/* Estilos para el modal */
+.modal {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards; /* Animación de entrada */
+}
+
+/* Cuando se cierra */
+.modal.fade-out {
+  animation: fadeOut 0.3s forwards; /* Animación de salida */
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Borde oscuro */
+  overflow: hidden; /* Para asegurar que el borde animado no afecte al contenido */
+}
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border: 2px solid #2294a9; /* Color inicial del borde */
+  border-radius: 10px; /* Asegura que el borde animado coincida con el radio del borde del modal */
+  pointer-events: none; /* Asegura que el borde animado no interfiera con los clics */
+  animation: rotateBorder 4s linear infinite; /* Animación de rotación del borde */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff0000;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.confirm-button {
+  background-color: #2294a9;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+  background-color: #1d7e92;
+}
+
+
+
+
+.guia{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.guia #itemfinal{
+padding-bottom: 0px;
+}
+.guia-container {
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.guia-title {
+  font-size: 32px; /* Tamaño del título en pantallas grandes */
+  margin-bottom: 40px;
+}
+
+/* Media Queries para pantallas medianas */
+@media (max-width: 768px) {
+  .guia-title {
+    max-width: 300px; /* Reduce el tamaño del título en pantallas medianas */
+    margin-bottom: 30px; /* Reduce el margen inferior */
+  }
+  #itemfinal{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+
+    
+    }
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 480px) {
+  .guia-title {
+    max-width: 300px; /* Reduce aún más el tamaño del título en dispositivos pequeños */
+    margin-bottom: 20px; /* Reduce el margen inferior en dispositivos pequeños */
+  }
+
+  .row #itemfinal {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+  
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 40px; /* Aumenta el espacio entre las imágenes */
+  margin-bottom: 40px;
+  flex-wrap: wrap; /* Hace que las imágenes se ajusten si no hay suficiente espacio */
+}
+
+.guia-item {
+  flex: 1 1 400px; /* Las imágenes ocuparán un mínimo de 400px de ancho */
+  max-width: 450px; /* Establece un tamaño máximo mayor */
+}
+
+.guia-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .row {
+    gap: 30px; /* Ajusta el espacio en pantallas medianas */
+  }
+
+  .guia-item {
+    max-width: 48%; /* Ocupa casi la mitad del contenedor en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column; /* En pantallas pequeñas, las imágenes se apilan verticalmente */
+    gap: 20px;
+  }
+
+  .guia-item {
+    max-width: 100%; /* Las imágenes ocupan todo el ancho disponible en pantallas pequeñas */
+  }
+}
+
+
+.sobreMiCard {
+ margin-bottom: 50px;
+ padding-top: 50px;
+  width: 80%;
+  margin: 0 auto; /* Centra la tarjeta en la página */
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.sobreMiContent {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sobreMiText {
+  flex: 1 1 60%;
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.sobreMiText h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #2294a9;
+}
+
+.sobreMiText p {
+  white-space: pre-wrap; /* Mantiene los saltos de línea */
+}
+
+.sobreMiImage {
+  flex: 1 1 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sobreMiImage img {
+  max-width: 100%;
+  border-radius: 10px;
+  object-fit: cover; /* Evita el estiramiento de la imagen */
+}
+
+.sobreMiCard {
+  position: relative;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.sobreMiCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+@keyframes flotacion {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.fondoParticulas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+
+
+.tituloReserva h2 {
+  font-size: 50px;
+  font-weight: 800;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #333;
+  opacity: 0;
+  transform: translateY(30px); /* Comienza más abajo */
+  animation: fadeInUp 1.5s ease forwards; /* Duración de 1.5s y efecto hacia arriba */
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px); /* Empieza desde abajo */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* Llega a su posición original */
+  }
+}
+
+.footer {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 40px 0;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 100px;
+  background-image: url("../imagenes/bannerFooter.png"); /* Imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para que cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative; /* Para que el contenido esté encima del fondo */
+  z-index: 1;
+}
+
+.footer-section {
+  flex: 1;
+  margin: 20px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.footer-section p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style-type: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  color: #f69e8e;
+}
+
+.footer-bottom {
+  position: relative; /* Asegura que el texto de derechos quede encima del fondo */
+  z-index: 2; /* Más arriba que la imagen de fondo */
+}
+
+
+.social-links a {
+  margin: 0 10px;
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.social-links a:hover {
+  color: #f69e8e;
+}
+
+.footer-bottom {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-section {
+    margin-bottom: 20px;
+  }
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .planCard {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  .cardContainer {
+    margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cardContainer {
+    padding: 15px;
+  }
+
+  .planCard {
+    padding: 25px 30px;
+  }
+}
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .benefitCard {
+    max-width: 45%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .benefitsSection {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .benefitCard {
+    max-width: 80%;
+    margin-bottom: 20px;
+  }
+}
+
+
+/* Animaciones AOS */
+[data-aos="fade"] {
+  opacity: 0;
+}
+
+[data-aos="fade"].aos-animate {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+[data-aos="fade-up"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+[data-aos="fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+[data-aos="fade-left"] {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+[data-aos="fade-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+[data-aos="zoom-in"] {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+[data-aos="zoom-in"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
