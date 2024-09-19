@@ -23,6 +23,27 @@ import "aos/dist/aos.css";
 import { motion } from "framer-motion";
 
 function Home() {
+  const [buttonTextCVU, setButtonTextCVU] = useState("Copiar CVU");
+  const [buttonTextAlias, setButtonTextAlias] = useState("Copiar Alias");
+
+  const copyToClipboard = (text, setButtonText) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setButtonText("¡Copiado!");
+
+        // Vuelve a "Copiar" después de 2 segundos
+        setTimeout(() => {
+          setButtonText(
+            text === "0000003100016292178501" ? "Copiar CVU" : "Copiar Alias"
+          );
+        }, 2000);
+      })
+      .catch((err) => {
+        console.error("Error al copiar al portapapeles: ", err);
+      });
+  };
+
   const [showModal, setShowModal] = useState(false); // Controla la visibilidad del modal
   const [modalType, setModalType] = useState(""); // Controla qué tipo de modal mostrar
 
@@ -56,11 +77,10 @@ function Home() {
         <img src={FondoPagina2} alt="fondopagina" className="fondoCover" />
       </div>
       <div className="banner" data-aos="fade-up" data-aos-once="true">
-          <img src={portadaBanner} alt="Nutricionista" className="photoCover" />
-        </div>
+        <img src={portadaBanner} alt="Nutricionista" className="photoCover" />
+      </div>
       <div className="cabecera">
         {/* Portada */}
-        
 
         {/* Botón "Planes" */}
         <div className="buttonContainer">
@@ -102,7 +122,6 @@ function Home() {
         <div className="content">
           <div class="description-card">
             <img src={fotovani} alt="Descripción de la imagen" />
-            
 
             <div className="description" data-aos="fade-right">
               <h2>Vamos a reconquistar tu salud</h2>
@@ -317,10 +336,100 @@ function Home() {
                     <strong>50.000 pesos</strong>
                     <br />
                     Vanina Alejandra Alaniz <br />
-                    CVU: 0000003100016292178501 <br />
-                    Alias: <em>nutri.vanina.mp</em>
+                    CVU: 0000003100016292178501{" "}
+                    <button
+                      className="modal-button"
+                      onClick={() =>
+                        copyToClipboard(
+                          "0000003100016292178501",
+                          setButtonTextCVU
+                        )
+                      }
+                    >
+                      {buttonTextCVU}
+                    </button>
                     <br />
                     CUIT/CUIL: 27327131716 <br />
+                    Alias: <em>nutri.vanina.mp</em>{" "}
+                    <button
+                      className="modal-button"
+                      onClick={() =>
+                        copyToClipboard("nutri.vanina.mp", setButtonTextAlias)
+                      }
+                    >
+                      {buttonTextAlias}
+                    </button>
+                    <br />
+                    Pago vía Mercado Pago.
+                    <br />
+                    <br />
+                    Para <strong>residentes fuera de Argentina</strong>: <br />
+                    <strong>55 USD</strong>
+                    <br />
+                    Pago vía{" "}
+                    <a
+                      href="https://www.paypal.me/nutrivani"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      PayPal
+                    </a>
+                    <br />
+                    <br />✨<em>Gracias</em>😌
+                    <br />
+                    Si el dinero es un limitante, no dudes en consultarme por
+                    otras opciones de pago.
+                    <p>
+                      ¡Hacé click en el siguiente icono para abrir una
+                      conversación conmigo en WhatsApp! <br />
+                      <br />
+                      <a
+                        href="https://wa.me/+5492664588310"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <i className="fab fa-whatsapp"></i>
+                      </a>
+                    </p>
+                  </p>
+                </>
+              ) : (
+                <>
+                  <strong>Consulta seguimiento</strong>
+                  <p>
+                    El pago es por adelantado y se debe reprogramar el turno con
+                    al menos 24 horas de antelación. Una vez realizado el pago,
+                    por favor envía el comprobante.
+                    <br />
+                    <br />
+                    Para <strong>residentes en Argentina</strong>: <br />
+                    <strong>50.000 pesos</strong>
+                    <br />
+                    Vanina Alejandra Alaniz <br />
+                    CVU:0000003100016292178501{""}
+                    <button
+                      className="modal-button"
+                      onClick={() =>
+                        copyToClipboard(
+                          "0000003100016292178501",
+                          setButtonTextCVU
+                        )
+                      }
+                    >
+                      {buttonTextCVU}
+                    </button>
+                    <br />
+                    CUIT/CUIL: 27327131716 <br />
+                    Alias: <em>nutri.vanina.mp</em>{" "}
+                    <button
+                      className="modal-button"
+                      onClick={() =>
+                        copyToClipboard("nutri.vanina.mp", setButtonTextAlias)
+                      }
+                    >
+                      {buttonTextAlias}
+                    </button>
+                    <br />
                     Pago vía Mercado Pago.
                     <br />
                     <br />
@@ -341,43 +450,17 @@ function Home() {
                     Si el dinero es un limitante, no dudes en consultarme por
                     otras opciones de pago.
                   </p>
-                </>
-              ) : (
-                <>
-                  <strong>Consulta seguimiento</strong>
                   <p>
-                    El pago es por adelantado y se debe reprogramar el turno con
-                    al menos 24 horas de antelación. Una vez realizado el pago,
-                    por favor envía el comprobante.
+                    ¡Hacé click en el siguiente icono para abrir una
+                    conversación conmigo en WhatsApp! <br />
                     <br />
-                    <br />
-                    Para <strong>residentes en Argentina</strong>: <br />
-                    <strong>50.000 pesos</strong>
-                    <br />
-                    Vanina Alejandra Alaniz <br />
-                    CVU: 0000003100016292178501 <br />
-                    Alias: <em>nutri.vanina.mp</em>
-                    <br />
-                    CUIT/CUIL: 27327131716 <br />
-                    Pago vía Mercado Pago.
-                    <br />
-                    <br />
-                    Para <strong>residentes fuera de Argentina</strong>: <br />
-                    <strong>55 USD</strong>
-                    <br />
-                    Pago vía{" "}
                     <a
-                      href="https://www.paypal.me/nutrivani"
+                      href="https://wa.me/+5492664588310"
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
-                      PayPal
+                      <i className="fab fa-whatsapp"></i>
                     </a>
-                    <br />
-                    <br />✨<em>Gracias</em>😌
-                    <br />
-                    Si el dinero es un limitante, no dudes en consultarme por
-                    otras opciones de pago.
                   </p>
                 </>
               )}
@@ -408,7 +491,7 @@ function Home() {
           <div className="guia-item">
             <img src={guiaturnos3} alt="guia3" />
           </div>
-          <div className="guia-item" id="itemfinal"> 
+          <div className="guia-item" id="itemfinal">
             <img src={guiaturnos4} alt="guia4" />
           </div>
         </div>
@@ -525,45 +608,41 @@ function Home() {
               bienestar.
             </p>
           </div>
-          <div className="footer-section links">
-            <h3>Enlaces útiles</h3>
-            <ul>
-              <li>
-                <a href="#about">Sobre mí</a>
-              </li>
-              <li>
-                <a href="#services">Servicios</a>
-              </li>
-              <li>
-                <a href="#contact">Contacto</a>
-              </li>
-            </ul>
-          </div>
+
           <div className="footer-section social">
             <h3>Redes Sociales</h3>
             <div className="social-links">
               <a
-                href="https://www.instagram.com"
+                href="https://www.instagram.com/nutri.vanina.alaniz/"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <i className="fab fa-instagram"></i>
+              ><i className="fab fa-instagram"></i>
+                ⠀instagram
+                
               </a>
               <a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/lic.vanina.alaniz?mibextid=ZbWKwL"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                <i className="fab fa-facebook-f"></i>
+              ><i className="fab fa-facebook-f"></i>
+                acebook
+                
               </a>
-              <a
-                href="https://www.linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-linkedin-in"></i>
-              </a>
-            </div>
+
+              <div className="wasapfooter">
+                <a
+                  href="https://wa.me/+5492664588310" // Reemplaza 1234567890 con el número de teléfono deseado
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  whatsapp
+                  <i className="fab fa-whatsapp"></i>
+                </a>
+
+                </div>
+                </div>
+              
+            
           </div>
         </div>
         <div className="footer-bottom">
