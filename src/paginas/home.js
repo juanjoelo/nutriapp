@@ -119,7 +119,7 @@ function Home() {
         </div>
 
         {/* Sección Foto y Descripción */}
-        <div className="content">
+        <div className="content" data-aos="fade-right">
           <div class="description-card">
             <img src={fotovani} alt="Descripción de la imagen" />
 
@@ -616,17 +616,17 @@ function Home() {
                 href="https://www.instagram.com/nutri.vanina.alaniz/"
                 target="_blank"
                 rel="noopener noreferrer"
-              ><i className="fab fa-instagram"></i>
+              >
+                <i className="fab fa-instagram"></i>
                 ⠀instagram
-                
               </a>
               <a
                 href="https://www.facebook.com/lic.vanina.alaniz?mibextid=ZbWKwL"
                 target="_blank"
                 rel="noopener noreferrer"
-              ><i className="fab fa-facebook-f"></i>
+              >
+                <i className="fab fa-facebook-f"></i>
                 acebook
-                
               </a>
 
               <div className="wasapfooter">
@@ -638,11 +638,8 @@ function Home() {
                   whatsapp
                   <i className="fab fa-whatsapp"></i>
                 </a>
-
-                </div>
-                </div>
-              
-            
+              </div>
+            </div>
           </div>
         </div>
         <div className="footer-bottom">
