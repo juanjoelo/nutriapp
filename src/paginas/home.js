@@ -192,7 +192,6 @@ function Home() {
             también te proporciona la energía y vitalidad necesarias para
             afrontar los desafíos diarios con mayor eficacia.
           </p>
-          .
           <img src={plato1} alt="plato1" className="plato1" />
         </div>
         <div
@@ -240,7 +239,8 @@ function Home() {
         className="seccion-planes"
         id="agenda-turno"
         data-aos="slide-right"
-        data-aos-duration="20000"
+        data-aos-duration="30000"
+        data-aos-delay="200"
       >
         <div className="cardContainer">
           {/* Tarjeta 1 */}
@@ -476,22 +476,54 @@ function Home() {
         <img src={guiaturnostitulo} alt="guiatitulo" className="guia-title" />
 
         <div className="row">
-          <div className="guia-item">
+          <div
+            className="guia-item"
+            data-aos="fade-up-left"
+            data-aos-duration="10000"
+            data-aos-delay="300"
+            data-aos-once="true"
+          >
             <img src={guiaturnos1} alt="guia1" />
           </div>
-          <div className="guia-item">
+          <div
+            className="guia-item"
+            data-aos="fade-up-right"
+            data-aos-duration="10000"
+            data-aos-delay="300"
+            data-aos-once="true"
+          >
             <img src={guiaturnos2} alt="guia2" />
           </div>
         </div>
 
         <div className="row">
-          <div className="guia-item">
+          <div
+            className="guia-item"
+            data-aos="fade-down-left"
+            data-aos-duration="10000"
+            data-aos-delay="300"
+            data-aos-once="true"
+          >
             <img src={guiaturnos2b} alt="guia2b" />
           </div>
-          <div className="guia-item">
+          <div
+            className="guia-item"
+            data-aos="fade-down-right"
+            data-aos-duration="10000"
+            data-aos-delay="300"
+            data-aos-once="true"
+
+          >
             <img src={guiaturnos3} alt="guia3" />
           </div>
-          <div className="guia-item" id="itemfinal">
+          <div
+            className="guia-item"
+            data-aos="fade-down-up"
+            data-aos-duration="10000"
+            data-aos-delay="300"
+            data-aos-once="true"
+            id="itemfinal"
+          >
             <img src={guiaturnos4} alt="guia4" />
           </div>
         </div>
