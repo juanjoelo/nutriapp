@@ -1,68 +1,69 @@
-import React, { useEffect, useState } from "react";
-
-//import TypingAnimation from "../../components/TypingAnimation";
-
+import React, { useEffect } from "react";// useState useRef
+import { motion } from "framer-motion";
 import "../paginasCSS/Home.css";
 import fotovani from "../imagenes/prueba1.png";
 import fotovani2 from "../imagenes/fotovani.png";
 import portadaBanner from "../imagenes/bannerPortada.png";
 import FondoPagina2 from "../imagenes/FondoPagina2.jpg";
 import FondoTarjeta from "../imagenes/fondoTarjetas.png";
-import FondoTarjeta2 from "../imagenes/fondoTarjetas2.png";
-import plato1 from "../imagenes/plato1.png";
-import plato2 from "../imagenes/plato2.png";
+//import FondoTarjeta2 from "../imagenes/fondoTarjetas2.png";
 import internBanner from "../imagenes/banner2vani.png";
-import guiaturnostitulo from "../imagenes/tituloguia.png";
-import guiaturnos1 from "../imagenes/guia1.png";
-import guiaturnos2 from "../imagenes/guia2.png";
-import guiaturnos2b from "../imagenes/guia2b.png";
-import guiaturnos3 from "../imagenes/guia3.png";
-import guiaturnos4 from "../imagenes/guia4.png";
+import fotoEsfera from "../imagenes/fotoEsfera.jpg";
+import foto2 from "../imagenes/foto2.jpg";
+import foto3 from "../imagenes/foto3.jpg";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { motion } from "framer-motion";
 
 function Home() {
-  const [buttonTextCVU, setButtonTextCVU] = useState("Copiar CVU");
-  const [buttonTextAlias, setButtonTextAlias] = useState("Copiar Alias");
+  // const [buttonTextCVU, setButtonTextCVU] = useState("Copiar CVU");
+  // const [buttonTextAlias, setButtonTextAlias] = useState("Copiar Alias");
+  // const [showModal, setShowModal] = useState(false); // Controla la visibilidad del modal
+  // const [modalType, setModalType] = useState(""); // Controla qué tipo de modal mostrar
 
-  const copyToClipboard = (text, setButtonText) => {
-    navigator.clipboard
-      .writeText(text)
-      .then(() => {
-        setButtonText("¡Copiado!");
+  //const modalRef = useRef(null); // Referencia al modal
 
-        // Vuelve a "Copiar" después de 2 segundos
-        setTimeout(() => {
-          setButtonText(
-            text === "0000003100016292178501" ? "Copiar CVU" : "Copiar Alias"
-          );
-        }, 2000);
-      })
-      .catch((err) => {
-        console.error("Error al copiar al portapapeles: ", err);
-      });
-  };
+  // const copyToClipboard = (text, setButtonText) => {
+  //   navigator.clipboard
+  //     .writeText(text)
+  //     .then(() => {
+  //       setButtonText("¡Copiado!");
 
-  const [showModal, setShowModal] = useState(false); // Controla la visibilidad del modal
-  const [modalType, setModalType] = useState(""); // Controla qué tipo de modal mostrar
+  //       // Vuelve a "Copiar" después de 2 segundos
+  //       setTimeout(() => {
+  //         setButtonText(
+  //           text === "0000003100016292178501" ? "Copiar CVU" : "Copiar Alias"
+  //         );
+  //       }, 2000);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error al copiar al portapapeles: ", err);
+  //     });
+  // };
 
   // Abre el modal y establece el tipo
-  const openModal = (type) => {
-    setModalType(type);
-    setShowModal(true);
-  };
+  // const openModal = (type) => {
+  //   setModalType(type);
+  //   setShowModal(true);
+  // };
 
   // Cierra el modal
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  // const closeModal = () => {
+  //   setShowModal(false);
+  // };
 
   // Maneja la confirmación en el modal y redirige
-  const handleConfirm = () => {
-    window.location.href = "https://app.nimbo-x.com/c/lic-vanina-alaniz";
-  };
+  // const handleConfirm = () => {
+  //   window.location.href = "https://app.nimbo-x.com/c/lic-vanina-alaniz";
+  // };
 
+  // Enfocar el modal cuando se abra
+  // useEffect(() => {
+    // if (showModal && modalRef.current) {
+  //     modalRef.current.focus(); // Enfoca el modal cuando se abre
+  //   }
+  // }, [showModal]);
+
+  // Inicialización de AOS
   useEffect(() => {
     AOS.init({
       duration: 1000, // Duración de la animación en milisegundos
@@ -76,12 +77,14 @@ function Home() {
       <div className="fondo" data-aos="fade" data-aos-duration="1500">
         <img src={FondoPagina2} alt="fondopagina" className="fondoCover" />
       </div>
-      <div className="banner" data-aos="fade-up" data-aos-once="true">
-        <img src={portadaBanner} alt="Nutricionista" className="photoCover" />
-      </div>
+      {/* Titulo */}
+
       <div className="cabecera">
         {/* Portada */}
 
+        <div className="tituloVani" data-aos="fade-up" data-aos-once="true">
+          <img src={internBanner} alt="internBanner" className="InternBanner" />
+        </div>
         {/* Botón "Planes" */}
         <div className="buttonContainer">
           <motion.button
@@ -109,12 +112,23 @@ function Home() {
             whileTap={{ scale: 0.9 }}
             data-aos="fade-left"
             onClick={() => {
-              document.getElementById("guiacontenedor").scrollIntoView({
+              document.getElementById("comotrabajo").scrollIntoView({
                 behavior: "smooth",
               });
             }}
           >
             Guía
+          </motion.button>
+          <motion.button
+            className="planButton"
+            whileHover={{
+              scale: 1.1,
+              boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
+            }}
+            whileTap={{ scale: 0.9 }}
+            data-aos="fade-left"
+          >
+            Tienda
           </motion.button>
         </div>
 
@@ -126,15 +140,17 @@ function Home() {
             <div className="description" data-aos="fade-right">
               <h2>Vamos a reconquistar tu salud</h2>
               <p>
-                Mi nombre es Vanina Alaniz, soy Licenciada en Nutrición.
-                <br /> Acá vas a encontrar tu guía hacia una vida saludable y
-                equilibrada. <br />
-                Transformemos tu relación con la comida a través de planes
-                nutricionales
+              Mi nombre es Vanina Alaniz y soy Licenciada en Nutrición y Máster PNI.
+                <br /> Estoy especializada en nutrición holística e integral, siendo mi 
+                objetivo guiarte hacia un estilo de vida saludable, 
+                brindándote el apoyo necesario para mejorar tu bienestar.
                 <br />
-                personalizados, asesoramiento experto y dedicado. <br />
-                Descubrí cómo una alimentación consciente puede mejorar tu
-                bienestar y ayudarte a alcanzar tus objetivos.
+                Te invito a transformar tu relación con la comida
+                 a través de planes nutricionales personalizados y
+                 asesoramiento experto y dedicado.
+                <br />
+                Descubrí cómo una alimentación consciente puede mejorar tu bienestar, 
+                equilibrar todos los aspectos de tu ser, y ayudarte a alcanzar tus objetivos.
               </p>
 
               <motion.button
@@ -161,13 +177,15 @@ function Home() {
       </div> */}
         {/* Sección Agenda tu turno */}
       </div>
+
+      {/* vida plena banner */}
       <div
         className="internBanner"
         data-aos="fade-up"
         data-aos-duration="2000"
         data-aos-once="true"
       >
-        <img src={internBanner} alt="internBanner" className="InternBanner" />
+        <img src={portadaBanner} alt="Nutricionista" className="photoCover" />
       </div>
 
       <div
@@ -178,57 +196,55 @@ function Home() {
       >
         <div
           className="benefitCard animate__animated animate__fadeInUp"
-          id="cartabeneficioid"
-          data-aos="slide-right"
-          data-aos-delay="100"
-        >
-          <h4>Mejorá tu salud</h4>
-          <p>
-            Un régimen nutricional equilibrado y bien diseñado es fundamental
-            para mantener un estado óptimo de salud. Al adoptar hábitos
-            alimenticios saludables, puedes fortalecer tu sistema inmunológico,
-            mejorar tu bienestar general y prevenir diversas enfermedades. Este
-            enfoque integral no solo promueve una vida más sana, sino que
-            también te proporciona la energía y vitalidad necesarias para
-            afrontar los desafíos diarios con mayor eficacia.
-          </p>
-          <img src={plato1} alt="plato1" className="plato1" />
-        </div>
-        <div
-          className="benefitCard animate__animated animate__fadeInUp"
-          id="cartabeneficioid"
-          data-aos="slide-right"
-          data-aos-delay="200"
-        >
-          <h4>Incrementá tu energía</h4>
-          <p>
-            Una alimentación balanceada y rica en nutrientes es clave para
-            elevar tus niveles de energía y optimizar tu rendimiento diario. Al
-            incorporar una variedad de alimentos frescos y nutritivos, como
-            frutas, verduras, proteínas magras y granos enteros, puedes mejorar
-            la eficiencia de tu metabolismo y mantener un flujo constante de
-            energía.
-          </p>
-          <img src={plato2} alt="plato1" className="plato1" />
-        </div>
-        <div
-          className="benefitCard animate__animated animate__fadeInUp"
-          id="cartabeneficioid"
+          id="cartabeneficioid1"
           data-aos="slide-right"
           data-aos-delay="300"
         >
+          <h4>Mejorá tu salud</h4>
+          <p>
+          Un régimen nutricional equilibrado y bien diseñado es fundamental
+           para mantener un estado óptimo de salud. Cuando decidís adoptar 
+           hábitos alimenticios saludables, podes fortalecer tu sistema inmunológico,
+            mejorar tu bienestar general y prevenir muchas enfermedades. 
+            Mi enfoque integral no solo promueve una vida más sana, sino que también te 
+            proporciona la energía y vitalidad necesarias para afrontar los desafíos diarios
+            con mayor equilibrio y fortaleza.
+
+          </p>
+          <img src={foto2} alt="plato1" className="soltarjeta" />
+        </div>
+        <div
+          className="benefitCard animate__animated animate__fadeInUp"
+          id="cartabeneficioid"
+          data-aos="slide-right"
+          data-aos-delay="600"
+        >
+          <h4>Incrementá tu energía</h4>
+          <p>
+          Una alimentación balanceada y rica en nutrientes es clave para elevar
+           tus niveles de energía y optimizar tu rendimiento diario. 
+           Cuando incorporas alimentos frescos y nutritivos, como frutas, 
+           verduras, proteínas magras y granos enteros, mejoras la eficiencia
+           de tu metabolismo y mantenes un flujo constante de energía.
+          </p>
+          <img src={fotoEsfera} alt="plato1" className="fotoesfera" />
+        </div>
+        <div
+          className="benefitCard animate__animated animate__fadeInUp"
+          id="cartabeneficioid1"
+          data-aos="slide-right"
+          data-aos-delay="900"
+        >
           <h4>Sentite bien</h4>
           <p>
-            Una dieta equilibrada no solo contribuye a tu salud física, sino que
-            también tiene un impacto profundo en tu bienestar emocional. Al
-            consumir alimentos ricos en vitaminas, minerales y antioxidantes,
-            puedes influir positivamente en tu estado de ánimo y reducir los
-            niveles de estrés. Nutrientes como los ácidos grasos omega-3,
-            encontrados en pescados grasos y nueces, y las vitaminas del
-            complejo B, presentes en granos enteros y vegetales, son esenciales
-            para mantener un equilibrio emocional estable.
+           Una dieta equilibrada no solo contribuye a tu salud física,
+           sino que también tiene un impacto profundo en tu bienestar
+           emocional. Al consumir alimentos ricos en vitaminas, minerales
+           y antioxidantes, influis positivamente en tu estado de ánimo
+           y reducis los niveles de estrés. 
+
           </p>
-          <img src={plato1} alt="plato1" className="plato1" />
+          <img src={foto3} alt="plato1" className="fototarjeta3" />
         </div>
       </div>
       <div className="tituloReserva">
@@ -267,13 +283,14 @@ function Home() {
                 boxShadow: "0 8px 15px rgba(0, 0, 0, 0.2)",
               }}
               whileTap={{ scale: 0.9 }}
-              onClick={() => openModal("first")} // Abre el primer modal
+              onClick={() => window.location.href = "https://wa.me/+5492664588310"}
             >
               Reservar
             </motion.button>
           </div>
-
-          {/* Tarjeta 2 */}
+          </div>
+{/* 
+          
           <div className="planCard">
             <img
               src={FondoTarjeta2}
@@ -304,9 +321,9 @@ function Home() {
           </div>
         </div>
 
-        {/* Modal */}
+     
         {showModal && (
-          <div className="modal">
+          <div className="modal" ref={modalRef} tabIndex="-1" role="dialog">
             <div className="modal-content">
               <span className="close-button" onClick={closeModal}>
                 &times;
@@ -353,6 +370,9 @@ function Home() {
                     Alias: <em>nutri.vanina.mp</em>{" "}
                     <button
                       className="modal-button"
+                      ref={modalRef}
+                      tabIndex="-1"
+                      role="dialog"
                       onClick={() =>
                         copyToClipboard("nutri.vanina.mp", setButtonTextAlias)
                       }
@@ -469,65 +489,26 @@ function Home() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
-      <div className="guia-container" id="guiacontenedor">
-        <img src={guiaturnostitulo} alt="guiatitulo" className="guia-title" />
+      <div className="como-trabajo" id="comotrabajo">
+  <div className="comotrabajo">
+    <h3>¿Cómo trabajo?</h3>
+    <p>
+      Durante la primera consulta hacemos un análisis general de tus necesidades y desafíos. También te voy a pedir un registro de comidas para poder analizarlo y hacerte sugerencias.
+      Armo un Plan Nutricional específico para vos, con recomendaciones personalizadas.
+      Además, tenés acceso a encuentros mensuales en un espacio virtual (Classroom) exclusivo para pacientes en tratamiento. En estos espacios podés hacer las preguntas que necesites. También tendrás acceso a los encuentros pasados que están grabados.
+      <br />
+      <br />
+      Durante las consultas de seguimiento:
+      La frecuencia va a depender de cada paciente y sus necesidades.
+      Durante la consulta abordamos dudas, consultas y desafíos. También hacemos un nuevo análisis de registro de comidas.
+      Te brindo sugerencias extras que pueden ayudarte y siempre podés volver a ver las clases grabadas y hacer preguntas.
+    </p>
+  </div>
+</div>
 
-        <div className="row">
-          <div
-            className="guia-item"
-            data-aos="fade-up-left"
-            data-aos-duration="10000"
-            data-aos-delay="300"
-            data-aos-once="true"
-          >
-            <img src={guiaturnos1} alt="guia1" />
-          </div>
-          <div
-            className="guia-item"
-            data-aos="fade-up-right"
-            data-aos-duration="10000"
-            data-aos-delay="300"
-            data-aos-once="true"
-          >
-            <img src={guiaturnos2} alt="guia2" />
-          </div>
-        </div>
-
-        <div className="row">
-          <div
-            className="guia-item"
-            data-aos="fade-down-left"
-            data-aos-duration="10000"
-            data-aos-delay="300"
-            data-aos-once="true"
-          >
-            <img src={guiaturnos2b} alt="guia2b" />
-          </div>
-          <div
-            className="guia-item"
-            data-aos="fade-down-right"
-            data-aos-duration="10000"
-            data-aos-delay="300"
-            data-aos-once="true"
-
-          >
-            <img src={guiaturnos3} alt="guia3" />
-          </div>
-          <div
-            className="guia-item"
-            data-aos="fade-down-up"
-            data-aos-duration="10000"
-            data-aos-delay="300"
-            data-aos-once="true"
-            id="itemfinal"
-          >
-            <img src={guiaturnos4} alt="guia4" />
-          </div>
-        </div>
-      </div>
 
       <motion.div
         className="sobreMiCard"
@@ -545,82 +526,89 @@ function Home() {
               Te cuento un poco sobre mi recorrido personal y profesional.
               <br />
               <br />
-              👩🏽‍🎓Me recibí en el 2010 de Lic. en Nutrición y mi tesis final fue
-              sobre enfermedad celíaca.
-              <br />
-              <br />
-              🔸<strong>Comencé a profundizar en neurodesarrollo</strong> con
-              los congresos de{" "}
-              <a
-                href="https://www.instagram.com/lincaorg/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @lincaorg
-              </a>
-              <br />
-              <br />
-              🔸Formaciones como Medicina Kallawaya con Omar Riachi y El Camino
-              de las Plantas con Carlos Batrouni{" "}
-              <i>me abrieron la cabeza (y el corazón) a la fitomedicina.</i>
-              <br />
-              <br />
-              🔸Más adelante llegó a mi vida{" "}
-              <a
-                href="https://www.instagram.com/melinabronfman/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @melinabronfman
-              </a>{" "}
-              con su mirada sobre la herida primal y la{" "}
-              <strong>Diplomatura en Nuevos Paradigmas en Crianza</strong> de la
-              cual fui alumna y ahora facilito la clase de nutrición. Hermosas
-              vueltas de la vida, ¿no?.
-              <br />
-              <br />
-              🔸Luego de ser mamá comencé a familiarizarme con{" "}
-              <strong>
-                la lactancia, el parto, el post parto y las disfunciones del
-                suelo pélvico
-              </strong>{" "}
-              junto a{" "}
-              <a
-                href="https://www.instagram.com/fisiofocus/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @fisiofocus
-              </a>
-              <br />
-              <br />
-              🔸La pandemia me llevó a formarme en trauma para aprender{" "}
-              <i>cómo darle paz al sistema nervioso</i> junto a{" "}
-              <a
-                href="https://www.instagram.com/juanrodriguezleiva/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                @juanrodriguezleiva
-              </a>
-              <br />
-              <br />
-              🔸Recientemente terminé el <strong>máster en PNI</strong>, lo que
-              llenó de felicidad, el <strong>Posgrado en microbiota</strong>, y
-              el <strong>Curso de dieta keto</strong> en{" "}
-              <a
-                href="https://www.instagram.com/regenera_pni/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                @regenera_pni
-              </a>
-              <br />
-              <br />
-              🔅Siempre intentando tener una visión integral de la vida y del
-              ser. Con el objetivo de poder guiarte de la mejor manera posible y
-              con todas las herramientas que sean necesarias para que recuperes
-              tu salud.
+              <div className="contenidoTexto">
+                👩🏽‍🎓Me recibí en el 2010 de Lic. en Nutrición y mi tesis final fue
+                sobre enfermedad celíaca.
+                <br />
+                <br />
+                🔸<strong>Comencé a profundizar en neurodesarrollo</strong> con
+                los congresos de{" "}
+                <a
+                  href="https://www.instagram.com/lincaorg/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @lincaorg
+                </a>
+                .
+                <br />
+                <br />
+                🔸Formaciones como Medicina Kallawaya con Omar Riachi y El
+                Camino de las Plantas con Carlos Batrouni{" "}
+                <i>me abrieron la cabeza (y el corazón) a la fitomedicina.</i>
+                <br />
+                <br />
+                🔸Más adelante llegó a mi vida{" "}
+                <a
+                  href="https://www.instagram.com/melinabronfman/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @melinabronfman
+                </a>{" "}
+                con su mirada sobre la herida primal y la{" "}
+                <strong>Diplomatura en Nuevos Paradigmas en Crianza</strong> de
+                la cual fui alumna y ahora facilito la clase de nutrición.
+                Hermosas vueltas de la vida, ¿No?
+                <br />
+                <br />
+                🔸Luego de ser mamá comencé a familiarizarme con{" "}
+                <strong>
+                  la lactancia, el parto, el post parto y las disfunciones del
+                  suelo pélvico
+                </strong>{" "}
+                junto a{" "}
+                <a
+                  href="https://www.instagram.com/fisiofocus/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @fisiofocus
+                </a>
+                .
+                <br />
+                <br />
+                🔸La pandemia me llevó a formarme en trauma para aprender{" "}
+                <i>cómo darle paz al sistema nervioso</i> junto a{" "}
+                <a
+                  href="https://www.instagram.com/juanrodriguezleiva/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  @juanrodriguezleiva
+                </a>
+                .
+                <br />
+                <br />
+                🔸Recientemente terminé el <strong>máster en PNI</strong>, lo
+                que llenó de felicidad, el{" "}
+                <strong>Posgrado en microbiota</strong>, y el{" "}
+                <strong>Curso de dieta keto</strong> en{" "}
+                <a
+                  href="https://www.instagram.com/regenera_pni/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  @regenera_pni
+                </a>
+                .
+                <br />
+                <br />
+                🔅Siempre intentando tener una visión integral de la vida y del
+                ser. Con el objetivo de poder guiarte de la mejor manera posible
+                y con todas las herramientas que sean necesarias para que
+                recuperes tu salud.
+              </div>
             </p>
           </div>
           <div className="sobreMiImage">
@@ -663,7 +651,7 @@ function Home() {
 
               <div className="wasapfooter">
                 <a
-                  href="https://wa.me/+5492664588310" // Reemplaza 1234567890 con el número de teléfono deseado
+                  href="https://wa.me/+5492664588310"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

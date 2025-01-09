@@ -20,13 +20,15 @@
   background-color: #f5f5f563; /* Fondo de la tarjeta */
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
 }
 .description-card img {
   width: 676px;
   height: 576px;
   border-radius: 10px;
   object-position: center; /* Alinea la imagen al centro del contenedor */
-  overflow: visible;
+  
+  border-radius: 30px;
 }
 
 .description-text {
@@ -40,15 +42,20 @@
   display: flex;
   justify-content: space-between; /* Mantiene espacio entre photo y description */
   margin-top: 40px;
-  flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+  flex-wrap: wrap;
+  padding-left: 80px;
 }
+
+
 .buttonContainer {
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
-  margin-right: 200px;
   padding: 15px 30px; 
-  margin-right: 270px;
+  margin-left: 100px;
+  margin-right: 150px;
+
+  
 }
 
 @media (max-width: 768px) {
@@ -58,6 +65,10 @@
     padding: 10px; /* Ajusta el padding para pantallas pequeñas */
     padding-bottom: 100px;
     background-color:#ffffff5d
+  }
+  .content{
+    padding-left: 0px;
+
   }
   
   .description-card img {
@@ -73,8 +84,7 @@
   }
 
   .buttonContainer {
-    justify-content: right; /* Centra los botones en pantallas pequeñas */
-    margin-left: 350px; /* Elimina el margen derecho en pantallas pequeñas */
+    margin-left: 0px; /* Elimina el margen derecho en pantallas pequeñas */
 
   }
 }
@@ -147,7 +157,28 @@
   margin-right:10px ;
 }
 
+.fotoesfera{
+  max-width: 500px;
+  border-radius: 20px;
+  max-height: 500px;
 
+}
+.soltarjeta{
+  max-width: 500px;
+  border-radius:20px;
+  max-height: 400px;
+}
+
+.cartabeneficioid1{
+max-height: 300px
+  }
+
+.fototarjeta3{
+  max-width: 500px;
+  border-radius:20px;
+  max-height: 400px;
+
+}
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -157,6 +188,14 @@
   }
   .benefitCard{
     max-width: 100px;
+  }
+
+
+  .soltarjeta{
+    max-width: 300px;
+  }
+  .fototarjeta3{
+    max-width: 300px;
   }
 }
 
@@ -170,6 +209,11 @@
    max-width: 250px;
   
   }
+  .fotoesfera{
+    max-width: 300px;
+    border-radius: 20px;
+  
+  }
 }
 
 
@@ -178,6 +222,7 @@
   justify-content: space-between;
   padding: 50px 20px;
   flex-wrap: wrap; /* Permite que los elementos se apilen en pantallas pequeñas */
+  
 }
 
 .benefitCard {
@@ -193,6 +238,7 @@
   animation: float 6s ease-in-out infinite;
   transition: transform 0.5s ease, box-shadow 0.5s ease; /* Transición suave para transform y box-shadow */
   /* Asegura que la tarjeta se agrande al hacer hover */
+  margin-bottom: 50px;
 }
 
 .benefitCard:hover {
@@ -237,7 +283,7 @@
   overflow: hidden;
   background: linear-gradient(45deg, rgb(34, 148, 169) 25%, rgba(255, 255, 255, 0) 50%, rgb(34, 148, 169)  75%);
   background-size: 200% 200%;
-  animation: shine 6s infinite; /* Aplica la animación de brillo */
+  animation: shine 2s infinite; /* Aplica la animación de brillo */
   transition: all 0.4s ease;
 }
 
@@ -274,74 +320,90 @@
   font-size: 1.1rem; /* Aumenta ligeramente el tamaño de la fuente */
   line-height: 1.6; /* Mejora la legibilidad del texto */
   max-height: 400px;
-
+}
+.InternBanner {
+ background-color: rgba(0, 0, 0, 0.261);
+ display: flex;
+ padding: 5px;
+margin-right: 10px;
+margin-top:20px;
+max-width: 1200px;
+padding-left: 500px;
+border-top-right-radius: 50px; /* Ajusta el valor según el redondeo deseado */
+border-bottom-right-radius: 50px;
+padding-right: 35px;
 }
 
 
-
 .photoCover {
-  background-color: #ffffff00;
   opacity: 100%;
   max-width: 1000px;
   border-radius: 5px;
-  float: right; /* Flota a la derecha */
+  float: center; /* Flota a la derecha */
   margin: 0 0 10px 10px; /* Espaciado a la izquierda para evitar que el texto se pegue */
   width: auto; /* Mantiene el tamaño de la imagen acorde a su contenido */
   box-sizing: border-box; /* Incluye el padding y border en el width total */
 }
+
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) {
   .photoCover {
     opacity: 100%;
     float: none; /* Elimina el float en pantallas pequeñas para apilar elementos verticalmente */
-    margin: 0 auto; /* Centra la imagen en pantallas pequeñas */
+    margin: 100px auto; /* Centra la imagen en pantallas pequeñas */
     width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible en pantallas pequeñas */
-    max-width: 90%; /* Asegura que la imagen no se extienda más allá de su contenedor en pantallas pequeñas */
-  }
-
-  .banner {
-    opacity: 100%;
-       /* Ajusta el tamaño máximo de la imagen del banner */
-    width: 100%; /* Asegura que la imagen del banner ocupe todo el ancho disponible en pantallas pequeñas */
-    float: none; /* Elimina el float para que se centre o alinee según el flujo del contenedor */
+    max-width: 70%; /* Asegura que la imagen no se extienda más allá de su contenedor en pantallas pequeñas */
   }
 }
 
 
-.InternBanner {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
-  margin-left: 330px;
-  max-width: 1200px;
-  width: 100%; /* Asegura que el banner ocupe todo el ancho del contenedor */
-  overflow: hidden; /* Evita que el contenido se desborde si es más grande que el contenedor */
-}
+
+
 
 /* Media Queries para pantallas pequeñas */
 @media (max-width: 768px) {
-  .InternBanner {
-     
-    padding: 10px; /* Agrega algo de espacio interno en móviles */
-    max-height:100px; /* Ajusta aún más la altura en dispositivos muy pequeños */
-    max-width: 400px;
-    padding-left:5px;
-    margin-left: 1px;
+  .InternBanner img{
+    padding: 10px;
+    margin-left: 600px;
+    padding-left: 500px;
+    margin-right: 0px;
+    padding-right: 0px;
+    
+  }
+.InternBanner{
+  margin-left: 0%;
+  margin-top:5%;
+
+}
+  .banner{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    padding-left: 100px;
+  }
+  .tituloVani{
+    max-width: 370px;
   }
 }
 
 @media (max-width: 480px) {
   .InternBanner {
-    margin-top: 35px;
-    max-height:100px; /* Ajusta aún más la altura en dispositivos muy pequeños */
-    max-width: 300px;
-    padding: 1px; /* Reduce el padding en pantallas muy pequeñas */
-    display: flex;
-    align-items: center;
+    max-height: 600px;
+    max-width: 100%;
+    padding: 5px;
     justify-content: center;
-    margin-left:15%;
+    align-items: center;
   }
+}
+
+/* Estilo para la imagen */
+.InternBanner img {
+  max-width: 100%; /* Asegura que la imagen no se desborde del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Elimina el espacio en línea debajo de la imagen */
 }
 
 
@@ -746,7 +808,7 @@ padding-bottom: 0px;
   width: 100%;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.406);
 }
 
 @media (max-width: 1024px) {
@@ -797,10 +859,11 @@ padding-bottom: 0px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
   gap: 20px;
 }
-
+.contenidoTexto{
+  text-align: left;
+}
 .sobreMiContent {
   display: flex;
   justify-content: space-between;
@@ -830,6 +893,9 @@ padding-bottom: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-height: 700px;
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .sobreMiImage img {
@@ -1057,6 +1123,7 @@ padding-bottom: 0px;
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .benefitCard {
+   
     max-width: 45%;
     margin-bottom: 20px;
   }
@@ -1066,6 +1133,7 @@ padding-bottom: 0px;
   .benefitsSection {
     flex-direction: column;
     align-items: center;
+    
   }
 
   .benefitCard {
@@ -1116,4 +1184,52 @@ padding-bottom: 0px;
   opacity: 1;
   transform: scale(1);
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+.comotrabajo {
+  position: relative;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 200px auto;
+  max-width: 60%;
+  max-height: 300px;
+  overflow: hidden;
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  line-height: 1.4;
+  text-align: justify;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .comotrabajo {
+    max-width: 90%; /* Hacer más ancho en móviles */
+    max-height: none; /* Elimina restricción de altura */
+    padding: 30px; /* Aumenta el padding interno */
+    font-size: 1rem; /* Incrementa el tamaño del texto */
+    line-height: 1.6; /* Mejora la legibilidad */
+  }
+}
+
+@media (max-width: 480px) {
+  .comotrabajo {
+    max-width: 95%; /* Casi todo el ancho */
+    padding: 40px; /* Espaciado interno más grande */
+    font-size: 1.1rem; /* Texto más grande */
+    line-height: 1.8; /* Más espacio entre líneas */
+  }
+}
+
+.comotrabajo h3{
+  color: #2294a9;
+  text-align: center;
+}
+
+.comotrabajo:hover {
+  transform: translateY(-10px); /* Efecto de elevación al pasar el mouse */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
 }
