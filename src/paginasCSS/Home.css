@@ -2,11 +2,14 @@
 
 
 .cabecera {
-    position: relative; /* Asegúrate de que la posición sea relativa para que el pseudo-elemento se posicione correctamente */
+    position: relative; 
     
 
 }
 
+:root {
+  color-scheme: light; /* Fuerza el tema claro */
+}
 
 
 
