@@ -1,0 +1,1292 @@
+ENTREGA LOCAL — NUTRIAPP
+Actualización 19/10/2026 — preparación de publicación solicitada por Juan:
+- npm test: 42/42. npm run test:postgres: 36/36; instancia descartable detenida.
+- npm run build, npm run format:check y git diff --check: OK.
+- Navegador: 24/26 escenarios pasaron en la ejecución general; los dos fallos eran la prueba PayPal anterior que buscaba el selector de país eliminado. Se actualizó para validar redirección directa, retorno pendiente y confirmación solo por servidor. Se reejecutó payment-history.spec.js completo: 4/4 en escritorio y móvil. Los 26 escenarios distintos quedan cubiertos con resultados aprobados.
+- Actualizada también la prueba de reservas para precios ARS/USD/UYU, país desde el borde autenticado, Prex pendiente y reprogramación solo después de confirmar recepción.
+- Revisión de archivos para GitHub: sin coincidencias con credenciales privadas locales ni artefactos de runtime. .env, data/, respaldos, node_modules/, dist/, test-results/ y capturas permanecen excluidos.
+- Paso a paso vigente de credenciales en docs/SUPABASE.md. La conexión y migración remota de Supabase siguen pendientes: publicar el código no migra la base ni activa pagos.
+- Producción y Vesper no fueron modificados. Las anotaciones de “sin commit/push” siguientes corresponden a entregas históricas anteriores a este pedido de publicación.
+
+Fecha: 2026-10-07 (America/Buenos_Aires)
+Repositorio: https://github.com/juanjoelo/nutriapp
+Ubicación WSL: /home/acer/projects/nutriapp
+Base: ff9bfcd
+Rama: master (sin crear ramas)
+Commit de entrega: ninguno
+Push: no
+Producción: no se tocó. Vesper: sin modificaciones por esta tarea.
+
+Implementación:
+- Frontend por módulos, diseño responsive y eliminación de turnos.
+- Catálogo, galería hasta 6 fotos, carrito y cotización de envío.
+- Centro de comando exclusivo para OWNER_EMAIL: productos, pedidos, despacho y gráfico.
+- Mercado Pago Checkout Pro, webhook verificado y pedidos idempotentes.
+- Adaptador de tarifas de Correo Argentino con origen 5881.
+- Avisos de ventas en cola persistente con reintentos SMTP.
+- SQLite y uploads persistentes; archivos de runtime ignorados por Git.
+- README y docs/architecture-map.json describen estructura y configuración.
+
+Validación:
+npm test: 16/16 aprobadas.
+npm run build: aprobado.
+npm run test:e2e: 10/10 aprobadas, escritorio y móvil.
+npm run format:check: aprobado.
+npm audit: 0 vulnerabilidades reportadas.
+git diff --check: aprobado.
+GET http://localhost:5173: 200 desde Windows.
+GET http://localhost:5173/api/health: {"ok":true}.
+Revisión visual: inicio, centro de comando y pedidos; capturas en test-results.
+Los datos de las capturas del panel son fixtures de prueba, no ventas reales.
+
+Pendiente externo:
+- Email de Vanina y remitente/SMTP.
+- Credenciales y cuenta de Mercado Pago de la dueña.
+- Credenciales de integración y customerId MiCorreo.
+- Dominio/hosting, catálogo real y validación end-to-end de proveedores en sandbox.
+No se enviaron emails reales, ni se crearon pagos o envíos reales.
+El pago del envío no genera etiqueta automáticamente: despacho desde MiCorreo.
+No hay inventario por unidades; disponibilidad manual publicado/oculto.
+
+Ajuste posterior del owner, 2026-10-07:
+- Sin enlace de administración en el sitio público.
+- Aviso automático de despacho al email capturado en el checkout, con seguimiento.
+- Registro transaccional del despacho y email, cola persistente, reintentos y estado en panel.
+- Pruebas adicionales: destinatario original, duplicados, fallos SMTP, reapertura de base y rollback.
+- Archivos afectados: SiteLayout.jsx, OrdersPanel.jsx, server/admin.js, server/app.js,
+  server/database.js, server/integrations/mail.js, server/integrations/shipment-mail.js,
+  tests/store.test.js, tests/browser/store.spec.js y documentación.
+
+git status --short --branch:
+Actualización de tienda solicitada por el owner:
+- Animación de miniatura desde el botón + hasta el carrito; reducción de movimiento respetada.
+- Tarjetas con descripción resumida y fotos completas sin recorte.
+- Página /tienda/:id con galería, descripción completa, precio y compra.
+- Ayuda sobre medidas y peso con envase en el formulario de productos.
+- Pruebas: carrito, límites, animación, movimiento reducido, galería, URLs directas y errores.
+- Revisado aceite de coco cargado por el usuario; preservado el proceso y los datos de inspección.
+- Archivos: src/features/shop/{ProductPage.jsx,ProductCard.jsx,useCartFlight.js,CartContext.jsx,ShopPage.jsx},
+  src/App.jsx, src/components/SiteLayout.jsx, src/features/admin/ProductsPanel.jsx,
+  src/styles/shop.css, tests/browser/product.spec.js y documentación.
+
+Inspección local habilitada a pedido del owner:
+- npm run inspect: http://localhost:4174/admin, acceso directo sin contraseña.
+- Base temporal con datos de demostración; no carga .env ni cuentas reales.
+- Emails simulados, cobros deshabilitados, autenticación normal sin bypass.
+- Validado desde Windows (HTTP 200) y Chromium: entrada directa, banner, gráfico, productos y pedidos.
+- Archivos: scripts/inspection-app.js, scripts/inspect.js, tests/inspection.test.js,
+  src/features/admin/AdminPage.jsx, package.json y README.md.
+- Build, formato y diff --check aprobados; sin commit/push ni cambios en producción.
+
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/lib/api.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — favoritos, gráficos, ofertas, combos y campañas
+- Slider primero en /tienda: hasta 12 productos disponibles con compras pagadas en los últimos 30 días móviles.
+- Gráficos de torta/barras, unidades/ingresos, selección de producto y detalle por fecha/pedido; incluye cero ventas.
+- Panel Ofertas y ocasiones: descuentos 0–90%, selección de productos, combos, plantillas Black Friday,
+  Día de la Madre y Navidad/Año Nuevo, textos, imagen, colores, prioridad y programación con horario argentino.
+- Descuentos no acumulables; gana el mayor sobre el precio de lista. Backend calcula precio y medidas del combo.
+- Checkout invalida cotizaciones que quedaron desactualizadas; pedidos históricos conservan importes.
+- Apariencia y precios se refrescan al límite de campaña conocido (temporizador puntual; no polling periódico)
+  y al volver a la pestaña. No se publicaron campañas en el catálogo de inspección durante los tests.
+- Preservación: backup SQLite consistente con proceso pausado, integridad verificada, copia de fotos,
+  cuatro productos conservados (incluido aceite de coco). Inspección ahora persiste en data/inspection-review/.
+- Servidor de inspección vigente: http://localhost:4174/admin; tienda: http://localhost:4174/tienda.
+  HTTP desde Windows: admin 200, foto de aceite 200, catálogo 4 productos, favoritos 2 productos.
+- Autenticación normal sin cambios: bypass solo en servidor local de inspección.
+- No hubo cobros, emails ni cotizaciones externas reales.
+Archivos de esta entrega:
+  server/merchandising.js (nuevo), server/product.js (serializador extraído), server/database.js,
+  server/catalog.js, server/commerce.js, server/admin.js, server/app.js;
+  src/features/admin/MerchandisingPanel.jsx (nuevo), SalesExplorer.jsx (nuevo), AdminPage.jsx,
+  Dashboard.jsx, ProductsPanel.jsx;
+  src/features/shop/Bestsellers.jsx (nuevo), ProductPrice.jsx (nuevo), ShopPage.jsx, ProductPage.jsx,
+  ProductCard.jsx; src/components/CampaignBanner.jsx (nuevo), SiteLayout.jsx; src/lib/colors.js (nuevo);
+  src/styles/merchandising.css (nuevo), base.css, src/main.jsx;
+  scripts/inspection-app.js, scripts/inspect.js; tests/store.test.js,
+  tests/browser/merchandising.spec.js (nuevo), tests/browser/store.spec.js;
+  README.md, docs/architecture-map.json, docs/VALIDACION_LOCAL.txt.
+Validaciones:
+  npm test: 19/19 aprobadas.
+  npm run test:e2e: 16/16 aprobadas (escritorio y celular; fixtures aislados).
+  npm run build: aprobado.
+  npm run format:check: aprobado.
+  git diff --check: aprobado.
+  Capturas reales de favoritos y gráficos inspeccionadas; archivos de prueba ignorados por Git.
+Estado: sin commit, sin push, sin nueva rama; base ff9bfcd. Producción y Vesper no se tocaron.
+Estado final completo (incluye refactorización previa de esta misma conversación):
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? tests/
+?? vite.config.js
+
+
+Actualización 2026-10-07 — colorimetría del logo provisto por Juan
+- Referencia visual: verde principal #006b49, amarillo #efb544; fondos verdes claros y blanco cálido.
+- Aplicado a sitio, tienda y panel. Gráficos exclusivamente verdes/amarillos; rojo limitado a errores/rechazos.
+- Plantillas de campañas ajustadas a la marca; campañas ya guardadas conservan la personalización del owner.
+- Archivos modificados: src/styles/{base,site,shop,admin,merchandising}.css,
+  src/features/admin/{MerchandisingPanel,SalesExplorer}.jsx y este registro.
+- npm run build, npm run format:check y git diff --check aprobados.
+- npm run test:e2e: 16 pruebas aprobadas, escritorio y celular. No se agregaron tests para este ajuste visual.
+- Capturas de inicio y gráficos inspeccionadas. Sitio y panel locales responden HTTP 200 en localhost:4174.
+- Sin commit/push ni cambios de rama. Producción y Vesper intactos.
+- git status --short --branch: ## master...origin/master; mismo estado completo registrado arriba,
+  con cambios de la refactorización y archivos nuevos sin stage. Sin nuevos archivos en esta entrega.
+
+Actualización 2026-10-07 — nuevo orden de la tienda solicitado por Juan
+- Encabezado Bienestar que te acompaña primero; campañas, filtros y catálogo a continuación.
+- Más vendidos del mes debajo de la grilla de productos, antes de las garantías de compra.
+- Reemplaza el pedido anterior de mostrar el carrusel primero.
+- Archivos: src/features/shop/ShopPage.jsx, src/styles/merchandising.css,
+  tests/browser/merchandising.spec.js (actualización de comprobaciones existentes), README.md y este registro.
+- Build aprobado; 6 pruebas de navegador aprobadas en escritorio/celular; git diff --check aprobado.
+- Preview actualizado http://localhost:4174/tienda, HTTP 200. Sin commit, push ni cambios en producción o Vesper.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — historial de campañas/combos y preparación de Supabase
+- Panel > Ofertas y ocasiones > Historial: versiones al crear, editar y eliminar, búsqueda,
+  filtros, paginación y detalles completos. Reutilizar abre una copia desactivada para revisión.
+- Eliminar una campaña/combo conserva la configuración en el historial y los pedidos previos.
+  Eliminar una versión borra esa versión; no elimina una campaña o combo vigente.
+- SQLite incorpora el registro inicial una sola vez. La eliminación de versiones persiste al reiniciar.
+- Preparado PostgreSQL de Supabase y Storage para fotos, con esquema privado, RLS, TLS,
+  autenticación del backend y credenciales solo del servidor. No se creó ni conectó un proyecto remoto.
+- Datos actuales de inspección: data/inspection-review/store.sqlite y uploads/ en ese directorio.
+  Respaldo completo previo al reinicio en data/inspection-review-before-history-*. Los cuatro
+  productos se conservaron; aceite de coco y su imagen verificados por HTTP 200.
+- Archivos nuevos principales: server/{connection,storage,merchandising-history}.js,
+  src/features/admin/MerchandisingHistory.jsx, supabase/migrations/001_store.sql,
+  scripts/{setup-supabase,test-postgres}.js, docs/SUPABASE.md y pruebas de persistencia/historial.
+- Modificados: backend y scripts para acceso async a DB, panel/estilos, configuración,
+  package.json/lock, README y mapa de arquitectura. .env real intacto.
+- npm test: 25/25 aprobados. npm run test:postgres: 19/19 aprobados en PostgreSQL local
+  descartable, detenido al finalizar. No acreditan conexión o permisos de Supabase remoto.
+- npm run test:e2e: 20/20 aprobados, escritorio y celular. Capturas del historial inspeccionadas.
+  Los límites elevados de peticiones pertenecen exclusivamente al servidor de pruebas E2E.
+- npm run build, npm run format:check y git diff --check aprobados.
+- Preview activo: http://localhost:4174/admin. Proveedores simulados: sin cobros ni emails reales.
+- Pendiente externo: crear proyecto Free, configurar credenciales y bucket, aplicar esquema y
+  verificar conexión. El esquema no importa automáticamente datos/fotos locales; ver docs/SUPABASE.md.
+- Sin commit, push, stage o cambios de rama. Producción y Vesper no fueron modificados.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — legibilidad y adaptación de sitio/panel
+- Tipografía base de 18px con unidades rem que respetan la preferencia del navegador.
+  Textos de apoyo entre 14 y 16px; marca secundaria de 12px. Títulos mantienen jerarquía.
+- Controles con áreas táctiles mayores, inputs de al menos 48px de alto, formularios en una
+  columna cuando falta espacio, navegación pública colapsable hasta 1000px y panel hasta 950px.
+- Ajustados tarjetas, carrito, encabezados, métricas, gráficos, historial, campañas y combos.
+  Tabla de ventas/detalle con registros apilados y etiquetas en celular; conserva roles de tabla.
+- Archivos modificados: src/styles/{base,site,shop,admin,merchandising}.css,
+  src/features/admin/SalesExplorer.jsx y este registro. Backend y datos sin cambios.
+- npm run build: aprobado. npm run test:e2e: 20/20 aprobadas. Tras el ajuste de tablas,
+  repetidos los 2 escenarios de gráficos/escritorio-celular: 2/2 aprobados.
+- Revisión con Chromium de 11 vistas a 320, 390, 768, 1024, 1440 y 1920px: 66 verificaciones
+  sin desborde horizontal. Repetidas vistas móviles tras ajustar tablas. Se inspeccionaron
+  capturas de inicio, panel, editor de productos y carrito. No equivale a pruebas en teléfonos físicos.
+- Aumento de texto al doble (36px de base) en 768px: 11 vistas sin desborde horizontal.
+- npm run format:check y git diff --check aprobados. Sin nuevos tests permanentes para cambios visuales.
+- Preview actualizado en http://localhost:4174/ y http://localhost:4174/admin.
+- Sin commit/push/stage ni nuevas ramas. Producción, backend y Vesper no fueron modificados.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — foto de portada y texto lateral
+- Incorporada exactamente la fotografía adjunta del plato; fuente src/imagenes/portada-plato.png.
+  scripts/optimize-images.js genera public/images/portada-plato.webp para la web.
+- HomePage.jsx usa la nueva foto y texto alternativo; el resto de las imágenes conserva sus fuentes.
+- site.css centra el encuadre y elimina el filtro de saturación de la portada. El lema lateral
+  queda vertical en una sola línea, separado de la foto; hasta 800px pasa horizontal debajo.
+- npm run build, npm run format:check y git diff --check aprobados.
+- Chromium: portada revisada en 320, 390, 768, 820, 1024, 1440 y 1920px; foto cargada,
+  sin desborde horizontal y sin intersección entre lema y foto. Capturas desktop/móvil inspeccionadas.
+- Preview actualizado http://localhost:4174/. Sin commit, push, stage o cambio de rama.
+  Producción, backend, datos de tienda y Vesper intactos.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — foto de mesa compartida y lema de portada
+- La sección Elegí con intención usa la foto adjunta: src/imagenes/mesa-compartida.png,
+  optimizada a WebP en scripts/optimize-images.js. HomePage.jsx actualiza imagen, alt y dimensiones.
+- Lema junto a la portada: CUERPO · MENTE; retirada únicamente la palabra NATURALEZA.
+- site.css elimina el filtro desaturado de la foto de invitación para conservar sus colores.
+- npm run build, npm run format:check y git diff --check aprobados.
+- Chromium a 320, 390, 768 y 1440px: nueva foto cargada, lema correcto, sin desbordes horizontales.
+  Capturas de la sección en escritorio y celular inspeccionadas.
+- Preview actualizado http://localhost:4174/. Sin commit, push, stage o cambios de rama.
+  Producción, backend, datos y Vesper intactos.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — estado de integraciones y email confirmado
+- Juan informó nutrivaninaalaniz@gmail.com. Incorporado a OWNER_EMAIL en .env local nuevo
+  (ignorado por Git) y .env.example; README actualizado para quitar el pendiente del email.
+- Verificada configuración mediante readConfig/readiness: owner presente, SMTP/pagos/envíos ausentes.
+  No se envió invitación ni correo real. La inspección mantiene su configuración aislada.
+- Código revisado: Checkout Pro Preferences, cobro de productos + envío, webhook payment
+  con verificación de firma y consulta del pago; avisos persistentes de venta y despacho.
+- Correo tiene cotizador /token + /rates desde 5881; no importa envíos, compra etiquetas ni
+  paga Correo automáticamente. Esas operaciones se realizan actualmente en MiCorreo.
+- Fuentes oficiales consultadas: FAQ MiCorreo y manual apiMiCorreo.pdf; documentación de
+  Mercado Pago checkout-pro-preferences/go-to-production y payment-notifications.
+  Se requieren cuenta MiCorreo validada, credenciales API por ambiente y customerId; además
+  aplicación de Mercado Pago de la dueña, credenciales, webhook HTTPS y pruebas con proveedores.
+- npm run format:check, git diff --check y comprobación de .env ignorado: aprobados.
+  No cambios al código de integraciones; no se repitieron tests de cobros simulados.
+- Sin commit, push, stage, ramas nuevas ni activación de pagos/envíos. Producción y Vesper intactos.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+Actualización 2026-10-07 — emblema de bienestar
+- Nuevo src/components/WellbeingEmblem.jsx con brote, sol y marco circular verde/amarillo,
+  usando los iconos vectoriales existentes. Decorativo, sin interacción ni texto redundante.
+- HomePage.jsx coloca el emblema entre título y párrafo de Mi forma de acompañarte.
+- site.css adapta la composición a escritorio, tablet y celular; mantiene lectura y separación.
+- npm run build, npm run format:check y git diff --check aprobados.
+- Chromium: 320, 390, 768, 820, 1024, 1440 y 1920px sin desbordes ni superposición
+  del emblema con título o párrafo. Capturas desktop y celular inspeccionadas.
+- Preview actualizado http://localhost:4174/#enfoque. Sin commit, push, stage ni ramas nuevas.
+  Producción, backend, datos de tienda y Vesper intactos.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+
+ENTREGA LOCAL — 2026-10-07 — Pagos OAuth y agenda sin registro
+Repositorio: /home/acer/projects/nutriapp. Vesper no se modificó.
+
+Implementación:
+- Sección privada Pagos: autorización oficial OAuth con PKCE, sesión y estado de un uso,
+  credenciales cifradas AES-256-GCM en DB, renovación y verificación, logo oficial y estado
+  MercadoPago conectado únicamente con autorización validada. Checkout usa esa cuenta.
+- Turnos públicos sin registro: servicios y packs, disponibilidad, reserva transaccional,
+  enlace privado, cambios/cancelaciones y saldo de consultas. Sin doble reserva concurrente.
+- Panel: lista/calendario, filtros, detalles, bloqueos, servicios/precios/cantidad de consultas,
+  horarios, estado de atención y registro manual de pago; enlace y QR descargable/imprimible.
+- Nuevas tablas en SQLite y migración 002 para PostgreSQL/Supabase, con RLS y esquema privado.
+- Email persistido para paciente y dueña en creación/cambios. Usa el temporizador de 5 minutos
+  existente (sin agregar polling). En inspección se simulan los envíos.
+- Agenda inicialmente pausada y servicios en borrador. Tratamiento incluye 3 consultas;
+  seguimiento requiere definir cantidad. Pago a coordinar; no hay cobro online de consultas.
+
+Archivos nuevos de esta etapa:
+server/bookings.js, server/booking-schema.sql, server/payment-connection.js
+supabase/migrations/002_bookings_payments.sql
+src/features/admin/PaymentsPanel.jsx, src/features/admin/BookingsPanel.jsx
+src/features/bookings/BookingPage.jsx, src/styles/bookings.css
+public/brands/mercadopago.svg
+tests/bookings-payments.test.js, tests/browser/bookings.spec.js
+
+Archivos ajustados de esta etapa:
+server/app.js, server/auth.js, server/admin.js, server/commerce.js, server/config.js,
+server/connection.js, server/database.js, server/integrations/mercadopago.js,
+server/integrations/mail.js, scripts/setup-supabase.js, scripts/test-postgres.js,
+src/features/admin/AdminPage.jsx, src/App.jsx, src/main.jsx, src/components/SiteLayout.jsx,
+src/styles/site.css, tests/postgres-fixture.js, tests/browser/store.spec.js,
+package.json, package-lock.json, .env.example, README.md, docs/SUPABASE.md,
+docs/architecture-map.json y este registro. Se agregó dependencia qrcode.
+
+Validación final:
+- npm test: 32/32 aprobadas.
+- npm run test:postgres: 26/26 aprobadas en cluster temporal local, detenido al finalizar.
+- npm run test:e2e: 22/22 aprobadas en escritorio y móvil, con proveedores simulados.
+- npm run build: aprobado.
+- npm run format:check: aprobado.
+- git diff --check: aprobado.
+- Inspección real localhost:4174: Pagos, Turnos y agenda pública en 320/390/768/1024/1440/1920px,
+  18 vistas sin desbordamiento horizontal ni errores JavaScript. Capturas inspeccionadas.
+- Respaldo consistente de data/inspection-review con proceso detenido e integrity_check OK;
+  conservados 4 productos y fotos. No se añadieron reservas ficticias a esa base persistente.
+
+Estado real externo:
+- La base activa sigue siendo SQLite local; Supabase está preparado, sin proyecto conectado.
+- Configuración privada comprobada solo por presencia: DATABASE_URL, SUPABASE_URL,
+  SUPABASE_SECRET_KEY, MP_CLIENT_ID, MP_CLIENT_SECRET, PAYMENT_ENCRYPTION_KEY y SMTP_HOST ausentes.
+- Sin cuenta de Mercado Pago conectada, sin autorización/cobros reales, sin SMTP real.
+- El botón OAuth se habilita con aplicación configurada y retorno HTTPS; no se simula conexión.
+- La configuración y límites están en README y docs/SUPABASE.md.
+
+Git: base ff9bfcd. Sin commit nuevo, sin push, sin stash, sin cambios de rama ni deploy.
+Producción no se tocó. Se preservó el trabajo acumulado previo sin staging.
+Estado completo al cierre (git status --short --branch):
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+AJUSTE LOCAL — 2026-10-07 — Formulario y carrito compacto
+Cambios: formulario de entrega visible desde el inicio, a la izquierda del resumen en escritorio y antes del resumen en móvil. Productos integrados al resumen con miniaturas y filas compactas. El botón de pago queda después del total, asociado al formulario de datos, y requiere una cotización. Los datos se conservan al calcular o cambiar el CP.
+Archivos: src/features/shop/CartPage.jsx, src/styles/shop.css y tests/browser/store.spec.js. Se actualiza este registro; los cambios previos se preservan.
+Validación: npm run build aprobado; npx playwright test tests/browser/store.spec.js tests/browser/product.spec.js, 10/10 aprobadas. Inspección visual local en 320, 390, 768, 1024 y 1440px sin desbordamiento. Verificado envío del formulario desde el botón externo mediante petición interceptada, sin cobros ni creación de pedido. git diff --check aprobado.
+Vista local actualizada: http://localhost:4174/carrito
+Sin commit, push, stash ni deploy. Producción y Vesper no se tocaron.
+Estado final de git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+AJUSTE LOCAL — 2026-10-07 — Pedidos plegables
+Pedidos pendientes, enviados y todos los pedidos se muestran colapsados por defecto. La cabecera conserva número, cliente, fecha, importe y estado; se despliega por clic o teclado para consultar compra, dirección, seguimiento y acciones. Cambiar de filtro/página o pasar a enviado vuelve a presentar el pedido cerrado.
+Contador visible del total de pedidos del filtro, incluyendo todas las páginas; no se calcula solo sobre los 20 registros visibles.
+Archivos modificados: src/features/admin/OrdersPanel.jsx, src/styles/admin.css, tests/browser/store.spec.js y este registro.
+Validación: npm run build aprobado; npx playwright test tests/browser/store.spec.js, 4/4 aprobadas en escritorio y móvil, incluyendo desplegar un pendiente, despachar, abrir el enviado y volver a cerrarlo. Capturas revisadas. git diff --check aprobado.
+Vista local: http://localhost:4174/admin?section=pedidos
+Sin cambios de backend ni de datos reales. Sin commit, push, stash ni deploy; producción y Vesper intactos. Se preservaron cambios anteriores.
+Estado final (git status --short --branch):
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-07 — Historial de Mercado Pago y cobros internacionales de consultas
+Alcance confirmado: consultas/packs online; cuenta Prex receptora de Argentina y PayPal existente. Tienda física y envíos siguen en Argentina.
+Cambios: historial de la cuenta MP autorizada con filtros, paginación y detalle; conexión PayPal de aplicación con credenciales cifradas; precios USD por servicio online; órdenes/captura PayPal verificadas; instrucciones Prex Uruguay -> Argentina y confirmación manual solo de dueña; cobros y recibos persistentes; sugerencia de país desde borde autenticado con corrección manual. Sin nuevo polling.
+Límites: no cuentas reales conectadas ni geolocalización activa localmente. PayPal requiere completar autorización del comprador y verificar/capturar desde reserva o panel; no webhook ni conciliación automática. Prex no tiene integración API en esta implementación. Consultas desde Argentina mantienen pago a coordinar; Mercado Pago checkout corresponde a productos. Supabase remoto y SMTP pendientes.
+Archivos nuevos: server/payment-history.js, server/consultation-payments.js, server/payment-country.js, server/payment-secrets.js, server/integrations/paypal.js, server/consultation-payment-schema.sql; supabase/migrations/003_consultation_payments.sql; src/features/admin/PaymentHistory.jsx, src/features/admin/InternationalPayments.jsx, src/features/bookings/ConsultationPayment.jsx, src/styles/payments.css; tests/browser/payment-history.spec.js; docs/PAGOS_INTERNACIONALES.md.
+Modificados: server/app.js, server/config.js, server/bookings.js, server/database.js, server/connection.js; scripts/setup-supabase.js, scripts/inspection-app.js; src/App.jsx, src/main.jsx, src/features/admin/PaymentsPanel.jsx, src/features/admin/BookingsPanel.jsx, src/features/bookings/BookingPage.jsx; tests/bookings-payments.test.js, tests/postgres-fixture.js, tests/browser/bookings.spec.js; .env.example, README.md, docs/SUPABASE.md, docs/architecture-map.json y este archivo.
+Validación:
+- npm test: 36/36 aprobadas (SQLite + adaptadores + inspección).
+- npm run test:postgres: 30/30 aprobadas, PostgreSQL descartable local 55439, migración 003 aplicada en esquemas aislados. No prueba Supabase remoto.
+- node --test tests/bookings-payments.test.js: 11/11 aprobadas nuevamente tras ajustes de seguridad, idempotencia y normalización de importes PayPal.
+- npx playwright test tests/browser/bookings.spec.js tests/browser/payment-history.spec.js: 6/6 aprobadas, escritorio/móvil; historial MP simulado, corrección de país, PayPal simulado y flujo Prex real sobre base temporal. Sin cuentas externas.
+- npm run build: OK; npm run format:check: OK; git diff --check: OK.
+- Imágenes de pruebas móvil revisadas: Pagos y reserva Prex, sin desbordamiento horizontal; console errors de prueba de agenda: ninguno.
+- Inspección reiniciada con backend actualizado en http://localhost:4174/admin?section=pagos. Llamadas externas MP/PayPal bloqueadas explícitamente. Flags verificados: paypalConnected=false, prexEnabled=false, geoConfigured=false.
+- Copias consistentes con proceso de inspección detenido y validación de cwd/cmdline: data/backup-before-payments-70YkbF y data/backup-before-payments-qGS1c5. Integridad OK, 4 productos preservados. Sin cambios a fotos/datos comerciales del usuario.
+Sin commit ni push. Producción intacta. Se preservó el árbol previo y no se creó ninguna rama. Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-07 — Tutoriales desplegables de PayPal y Prex Argentina
+Pedido: guías inicialmente colapsadas para que Vanina pueda configurar ambos medios, con investigación profunda de fuentes oficiales.
+Nuevo: src/features/admin/PaymentSetupGuides.jsx. Modificados: src/features/admin/InternationalPayments.jsx, src/styles/payments.css, README.md, docs/PAGOS_INTERNACIONALES.md y este registro.
+Contenido: seis pasos PayPal (Business, ID de comercio, aplicación/credenciales, ambiente, precio USD, verificación del cobro), ensayo Sandbox y resolución de problemas; cinco pasos Prex (cuenta argentina, titular/número correcto, habilitación y ARS, transferencia desde Uruguay, recepción verificada) y ayuda. Enlaces oficiales contextuales, fecha de revisión 7/10/2026 y aviso de variaciones de interfaz.
+Investigación: requisitos REST PayPal, ayuda Argentina Business e ID del establecimiento, cuentas Sandbox, monedas y errores; ayuda Prex Argentina sobre datos/número de cuenta/costos y cartilla/promoción Uruguay. Se corrigió la afirmación condicional sobre Business: la documentación oficial lo exige para integración live. La promoción Prex abierta mostraba 31/12/2026 frente a 30/09/2026 del buscador; se enlazan condiciones vigentes y no se fija una comisión permanente. Referencias completas en docs/PAGOS_INTERNACIONALES.md y en cada tutorial.
+Validaciones de esta entrega:
+- npm run build: OK.
+- npm run format:check: OK.
+- git diff --check: OK.
+- Revisión con navegador Chromium real en localhost:4174 a 320, 390, 768 y 1440 px: ambos tutoriales cerrados inicialmente; abrir con Enter/cerrar con Espacio; ayudas internas desplegables; texto sin desbordamiento horizontal; enlaces HTTPS de proveedores oficiales; formulario conserva el borrador. Cero errores JS y cero solicitudes de escritura durante la revisión.
+- Capturas abiertas/cerradas revisadas en data/payment-guide-review, excluidas de git. Se ajustó la vista de tablet a una columna para legibilidad. La primera ejecución del script falló por un selector de texto exacto que incluía un subtítulo; se corrigió el selector y la revisión final pasó completa.
+- Solo presentación y documentación: no se modificaron backend, cuentas, credenciales ni datos guardados; no se realizaron pagos. No se añadieron tests persistentes para esta modificación de contenido.
+Inspección actualizada: http://localhost:4174/admin?section=pagos.
+Sin commit ni push, sin ramas nuevas. Producción intacta. Cambios anteriores preservados. Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-19 — Identidad visual: logo original de Vanina
+- Imagen original adjunta guardada sin redibujar: public/brands/vanina-alaniz.png (270 x 237).
+- Marca compartida en cabecera, pie, acceso y panel; pie con logo de mayor tamaño. Colores originales conservados, base verde/amarilla del sitio.
+- Archivos: src/components/SiteLayout.jsx, src/styles/site.css, src/styles/admin.css y activo del logo.
+- npm run build: OK. npm run format:check: OK. git diff --check: OK.
+- Chromium en 320, 390, 768 y 1440 px: imágenes cargadas, proporciones conservadas, sin desborde horizontal, menú móvil y navegación administrativa visibles. Sin errores JS ni solicitudes de escritura.
+- Inspección visual: cabecera y panel en 320/1440 px y pie en escritorio. Evidencia local ignorada en data/brand-review/.
+- Preview local http://localhost:4174. Datos de inspección conservados. Sin cobros ni emails reales.
+- Sin commit ni push. Producción y Vesper no modificados. Cambios previos preservados.
+- Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-19 — Corrección: usar identidad original del repositorio
+- Revisión de activos versionados y su historial: public/LOGO-VANI.ico contiene el sol original, 256 x 253, transparente; LOGO-VANI.svg no contiene trazados ni imágenes. No se encontró el logo circular completo en mayor calidad.
+- SiteLayout.jsx usa directamente /LOGO-VANI.ico junto al nombre en cabecera, pie, acceso y panel. site.css elimina redondeos innecesarios. Retirada public/brands/vanina-alaniz.png (captura agregada en la tarea anterior).
+- npm run build, npm run format:check y git diff --check: OK.
+- Revisión Chromium a 320, 390, 768 y 1440 px, sitio y panel: original cargado con dimensiones correctas, sin desbordes, sin errores JS, menú móvil operativo; cero solicitudes de escritura.
+- Inspección visual de capturas de cabecera, pie y panel: OK. Evidencia local ignorada en data/brand-review/.
+- Sin commit ni push; producción y Vesper intactos. Cambios previos preservados.
+- Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-19 — Agenda local habilitada para probar reservas
+- Datos persistentes del entorno de inspección localhost:4174: siete días con 09:00–13:00 y 15:00–18:00. Consulta de control existente activada, duración 30 minutos, precio a coordinar. Conservadas anticipación mínima 2 horas, horizonte 60 días y cancelación 24 horas.
+- Configuración guardada mediante API administrativa; copia previa local ignorada en data/booking-review/settings-before-*.json. Ninguna configuración productiva modificada.
+- BookingPage.jsx: confirmación centrada en conservar el enlace privado; retirada mención de email que confundía durante la prueba.
+- Prueba real desde formulario público en Chromium, móvil 390 px: reserva confirmada el 21/10/2026 09:00, nombre Prueba de reserva local. Queda visible en panel Turnos para inspección.
+- Siete fechas consecutivas verificadas (incluye sábado/domingo): 14 horarios diarios antes de reservar, ninguno fuera de las franjas. Horario ocupado desaparece; segundo intento devuelve HTTP 409; enlace privado funciona tras recargar; reserva visible en panel escritorio.
+- SQLite local consultado en modo solo lectura confirma 7 días y 1 turno persistido. Correos exclusivamente simulados por mail.send vacío en scripts/inspection-app.js, sin transporte SMTP ni credenciales reales; 2 notificaciones procesadas por el simulador (paciente/administradora), ninguna entrega externa.
+- npm run build: OK. npm run format:check: OK. git diff --check: OK. Sin errores JS en el recorrido. Capturas y helpers de revisión en data/booking-review/ (ignorados).
+- Sin commit ni push; producción y Vesper intactos. Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+2026-10-19 — Pago obligatorio antes de confirmar nuevas reservas
+- Pedido: el turno debe pagarse antes de confirmar. Precio autorizado para pack de 3 consultas: $35.000 ARS, editable desde Servicios y packs; no se inventó precio para consulta individual.
+- Nuevas solicitudes: pending_payment durante 30 minutos, precio/cantidad congelados en el pack, sin aviso de turno confirmado al solicitar. Reservas previas conservadas. Horarios lunes a viernes 09–13 / 15–18 conservados.
+- Al vencer la retención se libera disponibilidad. Un pago tardío no pisa reservas/bloqueos: payment_review permite elegir otro horario con el pack pagado. Reservar sesiones adicionales exige pago registrado.
+- Mercado Pago: checkout de consultas sin envío, referencia propia, retorno sin token privado, webhook firmado específico y consulta al proveedor; verificación de ID/referencia/receptor/ARS/importe/ambiente/fecha. Verificación manual desde paciente/panel. PayPal/Prex confirman usando la misma transición transaccional.
+- Inspección: botón Simular pago aprobado claramente identificado; no se presenta como Mercado Pago, no llama a proveedores ni genera email. Ruta rechaza simulación fuera de inspección o en producción. Correos del entorno permanecen simulados.
+- Backend nuevo: server/booking-payment-state.js. Modificados: server/bookings.js, server/consultation-payments.js, server/integrations/mercadopago.js, server/app.js, server/payment-connection.js, scripts/inspection-app.js.
+- Frontend: src/features/bookings/BookingPage.jsx, ConsultationPayment.jsx; src/features/admin/BookingsPanel.jsx, InternationalPayments.jsx. Estados, botón Continuar al pago, gestión del pack e historial de cobros actualizados. Sin precio no se puede reservar un servicio.
+- Pruebas: tests/bookings-payments.test.js actualizado con casos de retenciones/vencimiento, concurrencia, impago, precio congelado, pago tardío, webhook y validaciones MP, reintentos y simulación restringida.
+- Documentación: README.md, docs/PAGOS_INTERNACIONALES.md, docs/architecture-map.json.
+- npm test: 40/40. npm run test:postgres: 34/34 en cluster local descartable, detenido al terminar. npm run build, npm run format:check, git diff --check: OK.
+- Chromium real: pack $35.000, formulario móvil, pendiente antes del pago y confirmado después de simulación, enlace privado recargable, dos consultas restantes, panel e historial identifican simulación, sin desbordes en 320/390/768/1440. Capturas data/booking-review/payment-*.png y paid-pack-admin.png; helpers ignorados.
+- Quedó un ejemplo confirmado: Prueba pago pack local, 22/10/2026 09:00. Un intento interrumpido por selector ambiguo del helper fue cancelado exclusivamente por nombre/email de esa prueba; no se borró ni modificó una reserva ajena.
+- Se respaldó SQLite local antes del cambio y se reinició únicamente scripts/inspect.js, verificando PID/cwd. Relectura tras reinicio: precio 3500000 centavos, 1 turno de prueba pagado/confirmado, 5 días habilitados.
+- Límites: sin cobros reales, sin correo real, sin cuenta MP conectada ni prueba sandbox externa. Antes de cobrar de verdad falta validar cuenta, HTTPS y webhook con proveedor. Supabase remoto no conectado; no se requirieron nuevas migraciones.
+- Sin commit ni push. Producción y Vesper intactos. Cambios previos preservados.
+- Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js
+
+
+19/10/2026 — Checkout directo y precios regionales
+- Reservar abre el checkout directamente, sin selector de país. Argentina MP/ARS; Uruguay Prex Argentina/ARS a recibir con referencia UYU; otros países PayPal/USD para online.
+- Retorno verifica con proveedor; cookie HttpOnly limitada a la ruta de retorno, token privado no enviado al proveedor. País y precios congelados para la solicitud.
+- Worker Cloudflare preparado, sin desplegar. Local usa Argentina identificada como inspección. Ninguna cuenta real conectada ni geolocalización pública acreditada.
+- Pack de 3 consultas local: ARS 50.000 / USD 32,15 / UYU 1.324,76 orientativos. Cotizaciones/fórmulas en PAGOS_INTERNACIONALES.md. Respaldada la base antes de cambiar precios; se conservan las solicitudes anteriores.
+- npm test: 42/42. npm run test:postgres: 36/36, PostgreSQL local descartable detenido al finalizar.
+- npm run build: OK. Playwright local 320/390/768/1440: sin selector, redirección inmediata al simulador, retorno sin pago sigue pendiente, aprobación simulada confirma, persistencia al recargar y tres precios visibles en panel. Sin errores de navegador ni desbordamientos. Sin emails ni cobros externos.
+- Cancelada únicamente una retención del paciente sintético redirect-test@example.test al interrumpirse el primer script de navegador; conservada la segunda prueba completada.
+- Archivos: server/booking-market.js, bookings.js, consultation-payments.js, app.js, integrations/mercadopago.js y paypal.js; scripts/country-edge-worker.js e inspection-app.js; src/App.jsx, features/bookings/BookingPage.jsx y ConsultationPayment.jsx, features/admin/BookingsPanel.jsx, InternationalPayments.jsx y PaymentSetupGuides.jsx; tests/bookings-payments.test.js; README.md, docs/PAGOS_INTERNACIONALES.md y architecture-map.json.
+- Sin commit, push ni despliegue; producción y Vesper sin cambios. Rama master...origin/master con refactor previo sin confirmar preservado.
+
+Cierre de checkout regional: format:check OK; git diff --check OK; /api/health OK; precios locales verificados por API.
+Estado final git status --short --branch:
+## master...origin/master
+ M .gitignore
+ M README.md
+ D app/globals.css
+ D components.json
+ M jsconfig.json
+ M package-lock.json
+ M package.json
+ D public/index.html
+ D public/manifest.json
+ D src/App.css
+ D src/App.js
+ D src/App.test.js
+ D src/components/magicui/typing-animation.jsx
+ D src/index.css
+ D src/index.js
+ D src/lib/utils.js
+ D src/logo.svg
+ D src/paginas/home.js
+ D src/paginasCSS/Home.css
+ D src/reportWebVitals.js
+ D src/setupTests.js
+ D tailwind.config.js
+?? .env.example
+?? .nvmrc
+?? .prettierignore
+?? .prettierrc.json
+?? docs/
+?? index.html
+?? playwright.config.js
+?? public/brands/
+?? scripts/
+?? server/
+?? src/App.jsx
+?? src/components/CampaignBanner.jsx
+?? src/components/SiteLayout.jsx
+?? src/components/WellbeingEmblem.jsx
+?? src/features/
+?? src/imagenes/mesa-compartida.png
+?? src/imagenes/portada-plato.png
+?? src/lib/api.js
+?? src/lib/colors.js
+?? src/main.jsx
+?? src/pages/
+?? src/styles/
+?? supabase/
+?? tests/
+?? vite.config.js

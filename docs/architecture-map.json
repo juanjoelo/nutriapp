@@ -1,0 +1,93 @@
+{
+  "project": "nutriapp",
+  "runtime": "Node.js 24",
+  "frontend": {
+    "entry": "src/main.jsx",
+    "routes": "src/App.jsx",
+    "layout": "src/components/SiteLayout.jsx",
+    "home": "src/pages/HomePage.jsx",
+    "shop": "src/features/shop",
+    "productDetail": "src/features/shop/ProductPage.jsx (/tienda/:id)",
+    "productCards": "src/features/shop/ProductCard.jsx",
+    "cartAnimation": "src/features/shop/useCartFlight.js",
+    "bestsellers": "src/features/shop/Bestsellers.jsx",
+    "campaigns": "src/features/admin/MerchandisingPanel.jsx + src/components/CampaignBanner.jsx",
+    "interactiveCharts": "src/features/admin/SalesExplorer.jsx",
+    "campaignHistory": "src/features/admin/MerchandisingHistory.jsx",
+    "bookings": "src/features/bookings/BookingPage.jsx + src/features/admin/BookingsPanel.jsx",
+    "paymentConnection": "src/features/admin/PaymentsPanel.jsx",
+    "paymentHistory": "src/features/admin/PaymentHistory.jsx + InternationalPayments.jsx",
+    "consultationPayments": "src/features/bookings/ConsultationPayment.jsx",
+    "owner": "src/features/admin",
+    "styles": "src/styles"
+  },
+  "backend": {
+    "entry": "server/index.js",
+    "http": "server/app.js",
+    "configuration": "server/config.js",
+    "persistence": "server/database.js",
+    "databaseAdapter": "server/connection.js (SQLite local / Supabase PostgreSQL)",
+    "fileStorage": "server/storage.js (local files / Supabase Storage)",
+    "configurationHistory": "server/merchandising-history.js",
+    "authentication": "server/auth.js",
+    "catalog": "server/catalog.js",
+    "pricingAndCampaigns": "server/merchandising.js",
+    "checkout": "server/commerce.js",
+    "paymentConnection": "server/payment-connection.js (OAuth, encrypted credentials, refresh)",
+    "paymentHistory": "server/payment-history.js (owner-only Mercado Pago search)",
+    "consultationPayments": "server/consultation-payments.js + server/integrations/paypal.js",
+    "countrySuggestion": "server/payment-country.js + server/booking-market.js (automatic trusted-edge market, fixed AR in local inspection only)",
+    "bookings": "server/bookings.js + server/booking-payment-state.js (30-minute unpaid holds, payment confirmation, availability, packs, private guest links, email outbox)",
+    "dashboard": "server/admin.js",
+    "providers": "server/integrations",
+    "countryEdge": "scripts/country-edge-worker.js (deployment pending)"
+  },
+  "data": {
+    "engine": "SQLite local or Supabase PostgreSQL; one API process",
+    "directory": "DATA_DIR, default ./data; excluded from git",
+    "tables": [
+      "owner",
+      "sessions",
+      "resets",
+      "products",
+      "quotes",
+      "orders",
+      "notifications",
+      "shipment_notifications",
+      "merchandising",
+      "merchandising_archived",
+      "merchandising_history",
+      "store_migrations",
+      "payment_accounts",
+      "payment_oauth_states",
+      "booking_settings",
+      "booking_services",
+      "booking_packages",
+      "appointments",
+      "booking_blocks",
+      "booking_notifications",
+      "international_payment_settings",
+      "paypal_accounts",
+      "consultation_payments"
+    ],
+    "media": "DATA_DIR/uploads locally; Supabase Storage bucket in cloud mode",
+    "cloudSetup": "docs/SUPABASE.md + supabase/migrations/001_store.sql + 002_bookings_payments.sql + 003_consultation_payments.sql"
+  },
+  "security": {
+    "roles": ["public storefront", "single configured owner"],
+    "owner": "OWNER_EMAIL, no registration, owner-only email password recovery",
+    "sessions": "hashed tokens, HttpOnly cookie, strict same-site, Secure in production",
+    "mutations": "same-origin and custom-header validation",
+    "payments": "server-side prices, stored quote, signed webhook, API payment verification"
+  },
+  "shipping": {
+    "origin": "5881",
+    "provider": "Correo Argentino MiCorreo",
+    "method": "home delivery, real rates by postal code and packed dimensions"
+  },
+  "tests": {
+    "api": "tests/store.test.js",
+    "browser": "tests/browser/store.spec.js",
+    "isolatedFixtures": "tests/e2e-server.js"
+  }
+}

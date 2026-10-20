@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+data
+public
+src/imagenes
+test-results
+playwright-report
+package-lock.json

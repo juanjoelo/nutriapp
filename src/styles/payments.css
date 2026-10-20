@@ -1,0 +1,215 @@
+.payments-page > .panel {
+  margin-bottom: 1.5rem;
+}
+.payment-history-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr auto;
+  gap: 1rem;
+  align-items: end;
+  margin: 1.5rem 0;
+}
+.payment-history-filters label {
+  min-width: 0;
+}
+.payment-history-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.payment-history-entry {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.payment-history-entry > summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 1rem;
+  align-items: center;
+  cursor: pointer;
+  padding: 1.1rem;
+}
+.payment-history-entry > summary::after {
+  content: 'Ver detalles +';
+  font-size: 0.85rem;
+  color: var(--forest);
+  grid-column: 1 / -1;
+}
+.payment-history-entry[open] > summary::after {
+  content: 'Ocultar detalles −';
+}
+.payment-history-entry summary small {
+  display: block;
+  margin-top: 0.35rem;
+}
+.payment-history-entry summary strong,
+.payment-entry-body {
+  overflow-wrap: anywhere;
+}
+.payment-history-entry dl,
+.payment-entry-body {
+  padding: 0 1.1rem 1.1rem;
+}
+.payment-history-entry dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.payment-history-entry dt,
+.consultation-payment dt {
+  font-weight: 600;
+}
+.payment-history-entry dd,
+.consultation-payment dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.international-payment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.payment-provider {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+.payment-provider form,
+.payment-entry-body form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.payment-provider details summary {
+  cursor: pointer;
+  padding: 0.8rem 0;
+}
+.payment-setup-guide {
+  margin: 1rem 0 1.5rem;
+  border: 1px solid #b6d2c0;
+  border-radius: 10px;
+  background: var(--sage);
+}
+.payment-provider .payment-setup-guide > summary {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--forest);
+  list-style: none;
+}
+.payment-setup-guide > summary::-webkit-details-marker {
+  display: none;
+}
+.payment-setup-guide > summary::after {
+  content: '+';
+  font-size: 1.4rem;
+  margin-left: auto;
+}
+.payment-setup-guide[open] > summary::after {
+  content: '−';
+}
+.payment-setup-guide > summary small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+.payment-guide-content {
+  padding: 0 1rem 1rem;
+}
+.payment-guide-content a {
+  color: var(--forest);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.payment-guide-content p,
+.payment-guide-content li {
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+.payment-guide-note {
+  padding: 1rem;
+  background: var(--gold-soft);
+  border-radius: 8px;
+  color: var(--ink);
+}
+.payment-guide-steps {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.payment-guide-steps > li {
+  padding-left: 0.3rem;
+  margin-bottom: 1.4rem;
+}
+.payment-guide-steps > li::marker {
+  color: var(--forest);
+  font-weight: 600;
+}
+.payment-guide-steps h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+.payment-guide-steps p:last-child {
+  margin-bottom: 0;
+}
+.payment-guide-extra {
+  border-top: 1px solid #b6d2c0;
+}
+.payment-guide-extra > summary {
+  font-weight: 600;
+}
+.payment-guide-extra ul {
+  padding-left: 1.2rem;
+}
+.payment-guide-extra li {
+  margin-bottom: 0.8rem;
+}
+.international-payment-grid {
+  align-items: start;
+}
+.consultation-payment {
+  margin: 1.5rem 0;
+}
+.consultation-payment .button {
+  margin: 0.4rem 0.6rem 0.4rem 0;
+  white-space: normal;
+}
+.consultation-payment dl {
+  display: grid;
+  gap: 1rem;
+}
+.payment-method-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+@media (max-width: 1050px) {
+  .international-payment-grid {
+    grid-template-columns: 1fr;
+  }
+  .payment-history-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .international-payment-grid,
+  .payment-history-filters,
+  .payment-history-entry dl {
+    grid-template-columns: 1fr;
+  }
+  .payment-history-entry > summary {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+  .payment-history .panel-heading {
+    display: grid;
+    gap: 1rem;
+  }
+  .consultation-payment .button {
+    width: 100%;
+    margin: 0.4rem 0;
+  }
+}
